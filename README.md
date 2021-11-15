@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+## Backend Repository
+
+https://www.github.com/Jaay7/smart-city-backend
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
