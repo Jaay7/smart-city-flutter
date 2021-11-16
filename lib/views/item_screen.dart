@@ -57,491 +57,544 @@ class _ItemScreenState extends State<ItemScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("${widget.name}"),
+          // title: Text("${widget.name}"),
+          backgroundColor: const Color(0xD8D1ACA5),
+          elevation: 0,
         ),
-        body: SingleChildScrollView(
-            child: widget.category == 'School' ? Query(
-            options: QueryOptions(
-            document: gql(GET_SCHOOL),
-            pollInterval: const Duration(milliseconds: 500),
-            variables: {
-              "id": widget.id 
-            }
+        body: widget.category == 'School' ? Query(
+        options: QueryOptions(
+        document: gql(GET_SCHOOL),
+        pollInterval: const Duration(milliseconds: 500),
+        variables: {
+          "id": widget.id 
+        }
           ), 
           builder: (QueryResult result, {VoidCallback? refetch, FetchMore? fetchMore}) {
-            if (result.hasException) {
-              return Text(result.exception.toString());
-            }
-            if (result.isLoading) {
-              return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
-            }
-            final school = result.data['school'];
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 15),
-                    child: Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Icon(Icons.phone, size: 16),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(school['contactInfo']),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
+        if (result.hasException) {
+          return Text(result.exception.toString());
+        }
+        if (result.isLoading) {
+          return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
+        }
+        final school = result.data['school'];
+        return Container(
+          height: MediaQuery.of(context).size.height,
+          color: Color(0x60E2CFC9),
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.26,
+                width: MediaQuery.of(context).size.width,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0)
                   ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Icon(Icons.store, size: 16),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(school['address']),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var desc in school['description']) Row(
-                              children: [
-                                Icon(Icons.circle, size: 6),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text("$desc"),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    )
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Standard", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var stand in school['standard']) Row(
-                              children: [
-                                Icon(Icons.circle, size: 6),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text("$stand"),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    )
-                  ),
-                ],
+                  color: Color(0xD1D1ACA5),
+                ),
+                child: Text(school['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
               ),
-            );
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.17,
+                left: MediaQuery.of(context).size.width * 0.05,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(
+                          0.0,
+                          0.0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.5,
+                      ), //BoxShadow
+                    ],
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(school['contactInfo']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.store, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(school['address']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var desc in school['description']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$desc"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Standard", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var stand in school['standard']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$stand"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Board", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.school, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(school['board']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]
+                      ),
+                    ),
+                  ),
+                )
+              ),
+            ],
+          ),
+        );
           }
         ) :
 // college
         widget.category == 'College' ? Query(
-            options: QueryOptions(
-            document: gql(GET_COLLEGE),
-            pollInterval: const Duration(milliseconds: 500),
-            variables: {
-              "id": widget.id 
-            }
+        options: QueryOptions(
+        document: gql(GET_COLLEGE),
+        pollInterval: const Duration(milliseconds: 500),
+        variables: {
+          "id": widget.id 
+        }
           ), 
           builder: (QueryResult result, {VoidCallback? refetch, FetchMore? fetchMore}) {
-            if (result.hasException) {
-              return Text(result.exception.toString());
-            }
-            if (result.isLoading) {
-              return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
-            }
-            final college = result.data['college'];
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 15),
-                    child: Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Icon(Icons.phone, size: 16),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(college['contactInfo']),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
+        if (result.hasException) {
+          return Text(result.exception.toString());
+        }
+        if (result.isLoading) {
+          return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
+        }
+        final college = result.data['college'];
+        return Container(
+          height: MediaQuery.of(context).size.height,
+          color: Color(0x60E2CFC9),
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.26,
+                width: MediaQuery.of(context).size.width,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0)
                   ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Icon(Icons.store, size: 16),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(college['address']),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var desc in college['description']) Row(
-                              children: [
-                                Icon(Icons.circle, size: 6),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text("$desc"),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    )
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Courses", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var course in college['course']) Row(
-                              children: [
-                                Icon(Icons.circle, size: 6),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text("$course"),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    )
-                  ),
-                ],
+                  color: Color(0xD1D1ACA5),
+                ),
+                child: Text(college['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
               ),
-            );
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.17,
+                left: MediaQuery.of(context).size.width * 0.05,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(
+                          0.0,
+                          0.0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.5,
+                      ), //BoxShadow
+                    ],
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(college['contactInfo']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(college['address']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var desc in college['description']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$desc"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Courses", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var course in college['course']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$course"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                )
+              ),
+            ],
+          ),
+        );
           }
         ) :
 // university
         widget.category == 'University' ? Query(
-            options: QueryOptions(
-            document: gql(GET_UNIVERSITY),
-            pollInterval: const Duration(milliseconds: 500),
-            variables: {
-              "id": widget.id 
-            }
+        options: QueryOptions(
+        document: gql(GET_UNIVERSITY),
+        pollInterval: const Duration(milliseconds: 500),
+        variables: {
+          "id": widget.id 
+        }
           ), 
           builder: (QueryResult result, {VoidCallback? refetch, FetchMore? fetchMore}) {
-            if (result.hasException) {
-              return Text(result.exception.toString());
-            }
-            if (result.isLoading) {
-              return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
-            }
-            final university = result.data['university'];
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 15),
-                    child: Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Icon(Icons.phone, size: 16),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(university['contactInfo']),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
+        if (result.hasException) {
+          return Text(result.exception.toString());
+        }
+        if (result.isLoading) {
+          return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
+        }
+        final university = result.data['university'];
+        return Container(
+          height: MediaQuery.of(context).size.height,
+          color: Color(0x60E2CFC9),
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.26,
+                width: MediaQuery.of(context).size.width,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0)
                   ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Icon(Icons.store, size: 16),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(university['address']),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var desc in university['description']) Row(
-                              children: [
-                                Icon(Icons.circle, size: 6),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text("$desc"),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    )
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 12.0,
-                    shadowColor: Colors.black38,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    margin: EdgeInsets.only(top: 25),
-                    child: Container(
-                      height: 250,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Branches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var branch in university['branch']) Row(
-                              children: [
-                                Icon(Icons.circle, size: 6),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text("$branch"),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    )
-                  ),
-                ],
+                  color: Color(0xD1D1ACA5),
+                ),
+                child: Text(university['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
               ),
-            );
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.17,
+                left: MediaQuery.of(context).size.width * 0.05,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(
+                          0.0,
+                          0.0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.5,
+                      ), //BoxShadow
+                    ],
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(university['contactInfo']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(university['address']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var desc in university['description']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$desc"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Branches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var branch in university['branch']) Row(
+                            children: [
+                              Icon(Icons.circle, size: 6),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text("$branch"),
+                              ),
+                            ],
+                          )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ]
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
           }
         ) : 
         Center(
           child: Column(
-            children: [
-              CircularProgressIndicator(),
-              Text("No data"),
-            ],
+        children: [
+          CircularProgressIndicator(),
+          Text("No data"),
+        ],
           )
         ),
-        )
+        floatingActionButton: FloatingActionButton.extended(
+          // backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          onPressed: () {
+            // Respond to button press
+          },
+          icon: Icon(Icons.favorite_outline),
+          label: Text('Favourite'),
+        ),
       ),
     );
   }

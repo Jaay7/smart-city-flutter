@@ -117,7 +117,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
-                              // color: Colors.amber,
+                              color: Color(0x40A9C7C5),
                               padding: EdgeInsets.all(10.0),
                               width: 180,
                               height: 180,
@@ -204,7 +204,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
-                              // color: Colors.amber,
+                              color: Color(0x40A9C7C5),
                               padding: EdgeInsets.all(10.0),
                               width: 180,
                               height: 180,
@@ -268,8 +268,8 @@ class _CategoriesState extends State<Categories> {
             Expanded(
               child: SizedBox(
                 child: universities.length > 0 ? GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: MediaQuery.of(context).size.width > 400 ? 2 : 6,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
                     mainAxisSpacing: 2.0,
                     crossAxisSpacing: 2.0,
                     childAspectRatio: 0.80,
@@ -291,7 +291,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
-                              // color: Color(0x05000000),
+                              color: Color(0x40A9C7C5),
                               padding: EdgeInsets.all(10.0),
                               width: 180,
                               height: 180,

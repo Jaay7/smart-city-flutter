@@ -36,5 +36,5 @@ TextStyle simpleTextStyle() {
   return TextStyle(color: Colors.black87, fontSize: 16);
 }
 TextStyle mediumTextStyle() {
-  return TextStyle(color: Colors.black87, fontSize: 17);
+  return TextStyle(color: Color(0xFF545454), fontSize: 16);
 }

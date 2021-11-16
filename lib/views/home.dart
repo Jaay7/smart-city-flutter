@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getUserInfo() async {
-    await HelperFunctions.getUserNameSharedPrefrences().then((value) {
+    await HelperFunctions.getUserEmailSharedPrefrences().then((value) {
       setState(() {
         email = value;
       });
@@ -42,13 +42,21 @@ class _MyHomePageState extends State<MyHomePage> {
     var threshold = 100;
 
     final SimpleDialog dialog = SimpleDialog(
-      elevation: 10,
-      title: Text(
+      elevation: 0,
+      backgroundColor: Colors.white24,
+      title: const Text(
         'Select Category to add',
-        style: textTheme.headline6,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+        ),
       ),
       contentPadding: const EdgeInsets.all(16.0),
       shape: const RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.white30,
+          width: 1,
+        ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       children: [
@@ -57,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ActionChip(
               elevation: 3,
-              backgroundColor: Colors.green.shade100,
+              backgroundColor: Color(0xFFE2CFC9),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-              avatar: Icon(Icons.school, color: Colors.green.shade900),
+              avatar: Icon(Icons.school, color: Color(0xFF82A3AC)),
               label: const Text('School'), 
               onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'School',)));
@@ -67,9 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ActionChip(
               elevation: 3,
-              backgroundColor: Colors.green.shade100,
+              backgroundColor: Color(0xFFE2CFC9),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-              avatar: Icon(Icons.house, color: Colors.green.shade900),
+              avatar: Icon(Icons.house, color: Color(0xFF82A3AC)),
               label: const Text('College'), 
               onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'College',)));
@@ -77,9 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ActionChip(
               elevation: 3,
-              backgroundColor: Colors.green.shade100,
+              backgroundColor: Color(0xFFE2CFC9),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-              avatar: Icon(Icons.work, color: Colors.green.shade900),
+              avatar: Icon(Icons.work, color: Color(0xFF82A3AC)),
               label: const Text('University'), 
               onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'University',)));
@@ -116,16 +124,16 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Builder(
         builder: (context) {
           return Container(
-            color: Colors.green,
+            color: Color(0xFFD1ACA5),
             // height: MediaQuery.of(context).size.height,
             child: Stack(
               alignment: AlignmentDirectional.bottomCenter,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.max,
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Column( children: [
+                Column( 
+                  children: [
                   Container(
+                    transformAlignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
                     height: 200,
                     child: ListTileTheme(
                       selectedColor: Colors.white,
@@ -159,17 +167,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 AnimatedPositioned(
                   curve: Curves.fastOutSlowIn,
                   duration: const Duration(milliseconds: 500),
-                  height: showMenu == false ? MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-100.0 : MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-280.0,
+                  height: showMenu == false ? MediaQuery.of(context).size.height * 0.875 : MediaQuery.of(context).size.height * 0.6,
                   width: MediaQuery.of(context).size.width,
                   child: Container(
                     // alignment: Alignment(0.0, -1.0),
                     // height: showMenu == false ? MediaQuery.of(context).size.height-60 : MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-240,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
+                    decoration: const BoxDecoration(
                       boxShadow: [
                       BoxShadow(
                         color: Colors.black45,
-                        offset: const Offset(
+                        offset: Offset(
                           5.0,
                           5.0,
                         ),
@@ -178,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ), //BoxShadow
                       BoxShadow(
                         color: Colors.white,
-                        offset: const Offset(0.0, 0.0),
+                        offset: Offset(0.0, 0.0),
                         blurRadius: 0.0,
                         spreadRadius: 0.0,
                       ), //BoxShadow
@@ -213,12 +220,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // ),
       floatingActionButton:
         FloatingActionButton(
-          child: Icon(Icons.add), 
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add), 
           onPressed: () {
             showDialog<void>(
               context: context,
-              builder: (context) => new BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              builder: (context) => BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                 child: dialog,
               )
             );
