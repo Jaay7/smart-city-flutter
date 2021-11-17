@@ -6,8 +6,7 @@ import 'package:smart_city_flutter/views/home.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
-  final HttpLink httpLink = HttpLink("http://192.168.1.125:8081/apis/graphql");
-  // final HttpLink httpLink = HttpLink("http://localhost:8081/apis/graphql");
+  final HttpLink httpLink = HttpLink("http://localhost:8081/apis/graphql");
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(
