@@ -65,31 +65,34 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ActionChip(
               elevation: 3,
-              backgroundColor: Color(0xFFE2CFC9),
+              backgroundColor: Color(0xFFc8dde3),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
               avatar: Icon(Icons.school, color: Color(0xFF82A3AC)),
               label: const Text('School'), 
               onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'School',)));
               }
             ),
             ActionChip(
               elevation: 3,
-              backgroundColor: Color(0xFFE2CFC9),
+              backgroundColor: Color(0xFFc8dde3),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
               avatar: Icon(Icons.house, color: Color(0xFF82A3AC)),
               label: const Text('College'), 
               onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'College',)));
               }
             ),
             ActionChip(
               elevation: 3,
-              backgroundColor: Color(0xFFE2CFC9),
+              backgroundColor: Color(0xFFc8dde3),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
               avatar: Icon(Icons.work, color: Color(0xFF82A3AC)),
               label: const Text('University'), 
               onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'University',)));
               }
             ),
@@ -137,8 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 200,
                     child: ListTileTheme(
                       selectedColor: Colors.white,
-                      textColor: Color(0x80FFFFFF),
-                      iconColor: Color(0x80FFFFFF),
+                      textColor: Color(0x70FFFFFF),
+                      iconColor: Color(0x70FFFFFF),
                       child: ListView(
                         children: <Widget>[
                           ListTile(
@@ -256,38 +259,5 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedDestination = index;
     });
-  }
-}
-
-class MenuWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 3 + 60,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          ListTile(
-              leading: Icon(Icons.favorite),
-              title: Text('Item 1'),
-              // selected: _selectedDestination == 0,
-              // onTap: () => selectDestination(0),
-            ),
-            ListTile(
-              leading: Icon(Icons.delete),
-              title: Text('Item 2'),
-              // selected: _selectedDestination == 1,
-              // onTap: () => selectDestination(1),
-            ),
-            ListTile(
-              leading: Icon(Icons.label),
-              title: Text('Item 3'),
-              // selected: _selectedDestination == 2,
-              // onTap: () => selectDestination(2),
-            ),
-        ],
-      ),
-    );
   }
 }

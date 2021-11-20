@@ -65,7 +65,6 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(
                           controller: emailTextEditingController,
-                          autofocus: true,
                           style: simpleTextStyle(),
                           decoration: textFieldInputDecoration("Email"),
                         ),

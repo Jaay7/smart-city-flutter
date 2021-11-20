@@ -75,7 +75,6 @@ class _SignUpState extends State<SignUp> {
                       child: TextFormField(
                         controller: firstNameTextEditingController,
                         style: simpleTextStyle(),
-                        autofocus: true,
                         decoration: textFieldInputDecoration("First Name"),
                       ),
                     ),

@@ -98,7 +98,8 @@ class _CategoriesState extends State<Categories> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 2.0,
                     crossAxisSpacing: 2.0,
-                    childAspectRatio: 0.75,
+                    // childAspectRatio: 0.90,
+                    mainAxisExtent: 180.0,
                   ),
                   itemCount: schools.length,
                   itemBuilder: (context, int index) {
@@ -117,15 +118,18 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
-                              color: Color(0x40A9C7C5),
                               padding: EdgeInsets.all(10.0),
-                              width: 180,
-                              height: 180,
+                              width: 160,
+                              height: 160,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(school['name']),
-                                  Text(school['contactInfo']),
-                                  Text(school['address']),
+                                  Text(school['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  SizedBox(height: 8),
+                                  Text(school['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
+                                  SizedBox(height: 4),
+                                  Text(school['address'], style: TextStyle(color: Color(0xFF727272))),
                                 ],
                               ),
                             ),
@@ -185,7 +189,8 @@ class _CategoriesState extends State<Categories> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 2.0,
                     crossAxisSpacing: 2.0,
-                    childAspectRatio: 0.80,
+                    // childAspectRatio: 0.80,
+                    mainAxisExtent: 180.0,
                   ),
                   itemCount: colleges.length,
                   itemBuilder: (context, int index) {
@@ -204,15 +209,18 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
-                              color: Color(0x40A9C7C5),
                               padding: EdgeInsets.all(10.0),
-                              width: 180,
-                              height: 180,
+                              width: 160,
+                              height: 160,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(college['name']),
-                                  Text(college['contactInfo']),
-                                  Text(college['address']),
+                                  Text(college['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  SizedBox(height: 8),
+                                  Text(college['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
+                                  SizedBox(height: 4),
+                                  Text(college['address'], style: TextStyle(color: Color(0xFF727272))),
                                 ],
                               ),
                             ),
@@ -272,7 +280,8 @@ class _CategoriesState extends State<Categories> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 2.0,
                     crossAxisSpacing: 2.0,
-                    childAspectRatio: 0.80,
+                    // childAspectRatio: 0.80,
+                    mainAxisExtent: 180.0,
                   ),
                   itemCount: universities.length,
                   itemBuilder: (context, int index) {
@@ -291,15 +300,18 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
-                              color: Color(0x40A9C7C5),
                               padding: EdgeInsets.all(10.0),
-                              width: 180,
-                              height: 180,
+                              width: 160,
+                              height: 160,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(university['name']),
-                                  Text(university['contactInfo']),
-                                  Text(university['address']),
+                                  Text(university['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  SizedBox(height: 8),
+                                  Text(university['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
+                                  SizedBox(height: 8),
+                                  Text(university['address'], style: TextStyle(color: Color(0xFF727272))),
                                 ],
                               ),
                             ),
