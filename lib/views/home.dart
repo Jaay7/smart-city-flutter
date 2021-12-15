@@ -20,7 +20,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedDestination = 0;
   bool showMenu = false;
-  String email = '';
+  String username = '';
   @override
   void initState() {
     getUserInfo();
@@ -28,9 +28,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getUserInfo() async {
-    await HelperFunctions.getUserEmailSharedPrefrences().then((value) {
+    await HelperFunctions.getUserNameSharedPrefrences().then((value) {
       setState(() {
-        email = value;
+        username = value;
       });
     });
   }

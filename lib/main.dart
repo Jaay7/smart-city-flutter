@@ -4,8 +4,12 @@ import 'package:smart_city_flutter/helper/authenticate.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
 import 'package:smart_city_flutter/views/home.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+
+  await dotenv.load(fileName: ".env");
+
   final HttpLink httpLink = HttpLink("http://localhost:8081/apis/graphql");
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(

@@ -74,7 +74,7 @@ class _ItemScreenState extends State<ItemScreen> {
         return Text(result.exception.toString());
       }
       if (result.isLoading) {
-        return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
+        return const Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
       }
       final school = result.data['school'];
       return Container(
@@ -98,145 +98,148 @@ class _ItemScreenState extends State<ItemScreen> {
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
-              left: MediaQuery.of(context).size.width * 0.05,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(
-                        0.0,
-                        0.0,
+              width: MediaQuery.of(context).size.width,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(
+                          0.0,
+                          0.0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.5,
+                      ), //BoxShadow
+                    ],
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(school['contactInfo']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.store, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(school['address']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var desc in school['description']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$desc"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Standard", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var stand in school['standard']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$stand"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Board", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.school, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(school['board']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]
                       ),
-                      blurRadius: 10.0,
-                      spreadRadius: 2.5,
-                    ), //BoxShadow
-                  ],
-                  color: Colors.white,
-                ),
-                height: MediaQuery.of(context).size.height * 0.6,
-                width: MediaQuery.of(context).size.width - 40,
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.phone, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(school['contactInfo']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.store, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(school['address']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                              SizedBox(height: 10.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for(var desc in school['description']) Row(
-                                    children: [
-                                      Icon(Icons.circle, size: 6),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text("$desc"),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Standard", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                              SizedBox(height: 10.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for(var stand in school['standard']) Row(
-                                    children: [
-                                      Icon(Icons.circle, size: 6),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text("$stand"),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Board", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.school, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(school['board']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]
                     ),
                   ),
                 ),
@@ -285,127 +288,130 @@ class _ItemScreenState extends State<ItemScreen> {
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
-              left: MediaQuery.of(context).size.width * 0.05,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(
-                        0.0,
-                        0.0,
-                      ),
-                      blurRadius: 10.0,
-                      spreadRadius: 2.5,
-                    ), //BoxShadow
-                  ],
-                  color: Colors.white,
-                ),
-                height: MediaQuery.of(context).size.height * 0.6,
-                width: MediaQuery.of(context).size.width - 40,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.phone, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(college['contactInfo']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+              width: MediaQuery.of(context).size.width,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(
+                          0.0,
+                          0.0,
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.phone, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(college['address']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                              SizedBox(height: 10.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for(var desc in college['description']) Row(
-                                    children: [
-                                      Icon(Icons.circle, size: 6),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text("$desc"),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Courses", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                              SizedBox(height: 10.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for(var course in college['course']) Row(
-                                    children: [
-                                      Icon(Icons.circle, size: 6),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text("$course"),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.5,
+                      ), //BoxShadow
+                    ],
+                    color: Colors.white,
                   ),
-                )
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(college['contactInfo']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.store, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(college['address']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var desc in college['description']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$desc"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Courses", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var course in college['course']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$course"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ),
               )
             ),
           ],
@@ -451,123 +457,126 @@ class _ItemScreenState extends State<ItemScreen> {
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
-              left: MediaQuery.of(context).size.width * 0.05,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(
-                        0.0,
-                        0.0,
-                      ),
-                      blurRadius: 10.0,
-                      spreadRadius: 2.5,
-                    ), //BoxShadow
-                  ],
-                  color: Colors.white,
-                ),
-                height: MediaQuery.of(context).size.height * 0.6,
-                width: MediaQuery.of(context).size.width - 40,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.phone, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(university['contactInfo']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+              width: MediaQuery.of(context).size.width,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(
+                          0.0,
+                          0.0,
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Icon(Icons.phone, size: 16),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text(university['address']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                              SizedBox(height: 10.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for(var desc in university['description']) Row(
-                                    children: [
-                                      Icon(Icons.circle, size: 6),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text("$desc"),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 20.0),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Branches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
-                              SizedBox(height: 10.0,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for(var branch in university['branch']) Row(
-                          children: [
-                            Icon(Icons.circle, size: 6),
-                            Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Text("$branch"),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.5,
+                      ), //BoxShadow
+                    ],
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Contact Info", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.phone, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(university['contactInfo']),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
-                        )
-                                ],
-                              )
-                            ],
                           ),
-                        ),
-                      ]
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Address", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.store, size: 16),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(university['address']),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Description", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var desc in university['description']) Row(
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$desc"),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20.0),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Branches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,),),
+                                SizedBox(height: 10.0,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for(var branch in university['branch']) Row(
+                            children: [
+                              Icon(Icons.circle, size: 6),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text("$branch"),
+                              ),
+                            ],
+                          )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ]
+                      ),
                     ),
                   ),
                 ),

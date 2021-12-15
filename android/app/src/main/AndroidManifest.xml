@@ -2,6 +2,7 @@
     package="com.example.smart_city_flutter">
    <application
         android:label="smart_city_flutter"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

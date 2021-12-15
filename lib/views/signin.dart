@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_twitter/flutter_twitter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
 import 'package:smart_city_flutter/views/home.dart';
@@ -29,6 +31,35 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
+  static final TwitterLogin twitterLogin = TwitterLogin(
+    consumerKey: dotenv.env['TWITTER_CONSUMER_KEY'].toString(),
+    consumerSecret: dotenv.env['TWITTER_CONSUMER_SECRET'].toString(),
+  );
+
+  void _signInWithTwitter() async {
+    final TwitterLoginResult result = await twitterLogin.authorize();
+    switch (result.status) {
+      case TwitterLoginStatus.loggedIn:
+        final String token = result.session.token;
+        final String secret = result.session.secret;
+        final String username = result.session.username;
+        Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => MyHomePage()));
+        HelperFunctions.saveUserNameSharedPrefrences(username);
+        HelperFunctions.saveUserLoginTypeSharedPrefrences('twitter');
+        print(username);
+        print(token);
+        print(secret);
+        break;
+      case TwitterLoginStatus.cancelledByUser:
+        print('cancelledByUser');
+        break;
+      case TwitterLoginStatus.error:
+        print(result.errorMessage);
+        break;
+    }
+  }
+  
   bool isLoading = false;
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
@@ -92,8 +123,9 @@ class _SignInState extends State<SignIn> {
                     print(result);
                     Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => MyHomePage()));
                     HelperFunctions.saveUserLoggedInSharedPrefrences(true);
-                    HelperFunctions.saveUserEmailSharedPrefrences(emailTextEditingController.text);
+                    HelperFunctions.saveUserLoginTypeSharedPrefrences('anonymous');
                     HelperFunctions.saveUserNameSharedPrefrences(result['loginUser']['username']);
+                    HelperFunctions.saveUserIdSharedPrefrences(result['loginUser']['id']);
                   }
                 ), builder: (
                   RunMutation runMutation,
@@ -144,6 +176,62 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                     )
+                  ],
+                ),
+                Divider(
+                  height: 30,
+                  thickness: 1.3,
+                  color: Colors.black12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Spacer(),
+                    Text(
+                      "Continue with ",
+                      style: mediumTextStyle(),
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        // signInWithGoogle();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Image.asset(
+                          "assets/images/google_logo.png",
+                          height: 28,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        // signInWithFacebook();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Image.asset(
+                          "assets/images/facebook_logo.png",
+                          height: 25,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        _signInWithTwitter();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Image.asset(
+                          "assets/images/twitter_logo.png",
+                          height: 40,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    
                   ],
                 ),
               ],

@@ -131,7 +131,9 @@ class _SignUpState extends State<SignUp> {
                     print(result);
                     Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => MyHomePage()));
                     HelperFunctions.saveUserLoggedInSharedPrefrences(true);
-                    HelperFunctions.saveUserEmailSharedPrefrences(emailTextEditingController.text);
+                    HelperFunctions.saveUserNameSharedPrefrences(result['CreateUser']['username']);
+                    HelperFunctions.saveUserIdSharedPrefrences(result['CreateUser']['id']);
+                    HelperFunctions.saveUserLoginTypeSharedPrefrences('anonymous');
                   }
                 ), builder: (
                   RunMutation runMutation,
