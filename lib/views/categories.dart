@@ -44,6 +44,25 @@ query FindAllUniversities {
 }
 """;
 
+const GET_JOBS = """
+query FindAllJobs {
+  findAllJobs {
+    id
+    name
+    jobType
+    description
+    minSalary
+    designation
+    qualifications
+    requirements
+    lastDate
+    startDate
+    benefits
+    eligibility
+  }
+}
+""";
+
 class Categories extends StatefulWidget {
   final String categoryName;
 
@@ -312,6 +331,95 @@ class _CategoriesState extends State<Categories> {
                                   Text(university['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
                                   SizedBox(height: 8),
                                   Text(university['address'], style: TextStyle(color: Color(0xFF727272))),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                ): Center(
+                  child: Text("No ${widget.categoryName} found!"),
+                ),
+              )
+            )
+          ],
+        );
+      }) :
+      // jobs
+      widget.categoryName == "Jobs" ? Query(
+        options: QueryOptions(
+          document: gql(GET_JOBS),
+          pollInterval: const Duration(milliseconds: 500),
+        ), 
+        builder: (QueryResult result, {VoidCallback? refetch, FetchMore? fetchMore}) {
+        if (result.hasException) {
+          return Text(result.exception.toString());
+        }
+        if (result.isLoading) {
+          return Center(
+            heightFactor: 13.0, 
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Loading"),
+                ),
+              ],
+            ),
+          );
+        }
+        final jobs = result.data?['findAllJobs'];
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Padding(padding: EdgeInsets.all(10.0)),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(bottom: 15, top: 10),
+              child: Text("${widget.categoryName}", style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500))
+            ),
+            Expanded(
+              child: SizedBox(
+                child: jobs.length > 0 ? GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 2.0,
+                    crossAxisSpacing: 2.0,
+                    // childAspectRatio: 0.80,
+                    mainAxisExtent: 180.0,
+                  ),
+                  itemCount: jobs.length,
+                  itemBuilder: (context, int index) {
+                    var job = jobs[index];
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () { 
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(id: job['id'],name: job['name'], category: 'Job')));
+                          },
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            elevation: 12.0,
+                            shadowColor: Colors.black38,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(10.0),
+                              width: 160,
+                              height: 160,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(job['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  SizedBox(height: 8),
+                                  Text(job['jobType'], style: TextStyle(color: Color(0xFF727272))),
                                 ],
                               ),
                             ),

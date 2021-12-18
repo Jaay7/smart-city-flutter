@@ -157,11 +157,17 @@ class _MyHomePageState extends State<MyHomePage> {
                             onTap: () => selectDestination(1),
                           ),
                           ListTile(
-                            leading: Icon(Icons.work),
+                            leading: Icon(Icons.corporate_fare_outlined),
                             title: Text('Universities'),
                             selected: _selectedDestination == 2,
                             onTap: () => selectDestination(2),
                           ),
+                          ListTile(
+                            leading: Icon(Icons.work),
+                            title: Text('Job'),
+                            selected: _selectedDestination == 3,
+                            onTap: () => selectDestination(3),
+                          )
                         ],
                       ),
                     ),
@@ -201,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
                         // color: Colors.amber,
-                        child: Categories(categoryName: _selectedDestination == 0 ? 'Schools' : _selectedDestination == 1 ? 'Colleges' : 'Universities',)
+                        child: Categories(categoryName: _selectedDestination == 0 ? 'Schools' : _selectedDestination == 1 ? 'Colleges' : _selectedDestination == 2 ?'Universities': 'Jobs',)
                       ),
                     ),
                   ),
