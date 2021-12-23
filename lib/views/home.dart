@@ -107,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
         primary: true,
         title: Text("Smart City"),
         toolbarHeight: 60.0,
+        backgroundColor: Color(0xFF6D6875),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -127,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Builder(
         builder: (context) {
           return Container(
-            color: Color(0xFFD1ACA5),
+            color: Color(0xFF6D6875),
             // height: MediaQuery.of(context).size.height,
             child: Stack(
               alignment: AlignmentDirectional.bottomCenter,
@@ -182,6 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // alignment: Alignment(0.0, -1.0),
                     // height: showMenu == false ? MediaQuery.of(context).size.height-60 : MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-240,
                     decoration: const BoxDecoration(
+                      color: Color(0x7cB5838D),
                       boxShadow: [
                       BoxShadow(
                         color: Colors.black45,
@@ -231,6 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
         FloatingActionButton(
           foregroundColor: Colors.white,
           child: const Icon(Icons.add), 
+          backgroundColor: Color(0xFFB5838D),
           onPressed: () {
             showDialog<void>(
               context: context,

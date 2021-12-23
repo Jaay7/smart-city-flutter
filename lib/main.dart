@@ -68,24 +68,24 @@ ThemeData _buildSolidTheme() {
 }
 
 ColorScheme _lightColor = const ColorScheme(
-  primary: ClamShell, 
-  background: ClamShell, 
+  primary: ColorOne, 
+  background: ColorOne, 
   brightness: Brightness.light, 
-  error: ClamShell, 
-  onBackground: ClamShell, 
-  onError: ClamShell, 
+  error: ColorOne, 
+  onBackground: ColorOne, 
+  onError: ColorOne, 
   onPrimary: Colors.white, 
-  onSecondary: Opal, 
-  onSurface: PearlBush, 
-  primaryVariant: PearlBush, 
-  secondary: Ziggurat, 
-  secondaryVariant: Opal, 
-  surface: PearlBush, 
+  onSecondary: ColorFour, 
+  onSurface: ColorTwo, 
+  primaryVariant: ColorTwo, 
+  secondary: ColorFive, 
+  secondaryVariant: ColorFive, 
+  surface: ColorTwo, 
 );
 
-const Color ClamShell = Color(0xFFD1ACA5);
-const Color PearlBush = Color(0xFFE2CFC9);
-const Color JetStream = Color(0xFFBFD8D2);
-const Color Opal = Color(0xFFA9C7C5);
-const Color Ziggurat = Color(0xFF82A3AC);
+const Color ColorFour = Color(0xFFFFCDB2);
+const Color ColorTwo = Color(0xFFFFB4A2);
+const Color ColorThree = Color(0xFFE5989B);
+const Color ColorFive = Color(0xFFB5838D);
+const Color ColorOne = Color(0xFF6D6875);
 

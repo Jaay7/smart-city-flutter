@@ -73,6 +73,7 @@ class _SignInState extends State<SignIn> {
       ): SingleChildScrollView(
         child: Center(
           child: Container(
+            color: Color(0xFF6D6875),
             height: MediaQuery.of(context).size.height,
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 24),
@@ -86,7 +87,7 @@ class _SignInState extends State<SignIn> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           "Login here,",
-                          style: TextStyle(color: Color(0xFF82A3AC), fontSize: 26),
+                          style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 26),
                         ),
                       ),
                       SizedBox(height: 20),
@@ -141,12 +142,12 @@ class _SignInState extends State<SignIn> {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.symmetric(vertical: 15),
                       decoration: BoxDecoration(
-                        color: Color(0xFFD1ACA5),
+                        color: Color(0xFFB5838D),
                         // color: Color(0xff007EF4),
                         borderRadius: BorderRadius.circular(10)),
                       child: Text(
                         "Sign In",
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                        style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     )
                   );
@@ -159,7 +160,7 @@ class _SignInState extends State<SignIn> {
                   children: [
                     Text(
                       "Don't have an account? ",
-                      style: mediumTextStyle(),
+                      style: TextStyle(color: Color(0xFFe2e2e2), fontSize: 16),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -170,7 +171,7 @@ class _SignInState extends State<SignIn> {
                         child: Text(
                           "Register here",
                           style: TextStyle(
-                            color: Color(0xFF82A3AC),
+                            color: Color(0xFFE5989B),
                             fontSize: 16,
                           ),
                         ),
@@ -189,7 +190,7 @@ class _SignInState extends State<SignIn> {
                     Spacer(),
                     Text(
                       "Continue with ",
-                      style: mediumTextStyle(),
+                      style: TextStyle(color: Color(0xFFe2e2e2), fontSize: 16),
                     ),
                     Spacer(),
                     GestureDetector(
@@ -197,6 +198,9 @@ class _SignInState extends State<SignIn> {
                         // signInWithGoogle();
                       },
                       child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: textFieldBoxDecoration(),
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Image.asset(
                           "assets/images/google_logo.png",
@@ -210,6 +214,9 @@ class _SignInState extends State<SignIn> {
                         // signInWithFacebook();
                       },
                       child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: textFieldBoxDecoration(),
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Image.asset(
                           "assets/images/facebook_logo.png",
@@ -223,6 +230,9 @@ class _SignInState extends State<SignIn> {
                         _signInWithTwitter();
                       },
                       child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: textFieldBoxDecoration(),
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Image.asset(
                           "assets/images/twitter_logo.png",

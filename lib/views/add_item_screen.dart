@@ -87,7 +87,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       body: SingleChildScrollView(
         child: Form(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 60.0),
             child: widget.categoryName == 'School' ? Column(
               children: [
                 Card(
@@ -152,25 +152,28 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                 hintText: 'Description',
                               ),
                             ),
-                            ElevatedButton.icon(
-                              icon: Icon(Icons.add),
-                              label: Text("Add"),
-                              onPressed: () {
-                                if (schoolDescriptionTextEditingController.text.isNotEmpty) {
-                                  setState(() {
-                                    schoolDescriptionList.add(schoolDescriptionTextEditingController.text);
-                                    schoolDescriptionTextEditingController.text = '';
-                                  });
-                                } else {
-                                  final snackBar = SnackBar(
-                                    backgroundColor: Color(0xFF464646),
-                                    duration: Duration(seconds: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Text('Cannot add empty description'),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
-                              },
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (schoolDescriptionTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      schoolDescriptionList.add(schoolDescriptionTextEditingController.text);
+                                      schoolDescriptionTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty description'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
                             )
                           ],
                         ),
@@ -267,25 +270,28 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                 hintText: 'Standard',
                               ),
                             ),
-                            ElevatedButton.icon(
-                              icon: Icon(Icons.add),
-                              label: Text("Add"),
-                              onPressed: () {
-                                if (schoolStandardTextEditingController.text.isNotEmpty) {
-                                  setState(() {
-                                    schoolStandardList.add(schoolStandardTextEditingController.text);
-                                    schoolStandardTextEditingController.text = '';
-                                  });
-                                } else {
-                                  final snackBar = SnackBar(
-                                    backgroundColor: Color(0xFF464646),
-                                    duration: Duration(seconds: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Text('Cannot add empty standard'),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
-                              },
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (schoolStandardTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      schoolStandardList.add(schoolStandardTextEditingController.text);
+                                      schoolStandardTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty standard'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
                             )
                           ],
                         ),
@@ -387,25 +393,28 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                   hintText: 'Description',
                                 ),
                               ),
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.add),
-                                label: Text("Add"),
-                                onPressed: () {
-                                  if (collegeDescriptionTextEditingController.text.isNotEmpty) {
-                                    setState(() {
-                                      collegeDescriptionList.add(collegeDescriptionTextEditingController.text);
-                                      collegeDescriptionTextEditingController.text = '';
-                                    });
-                                  } else {
-                                    final snackBar = SnackBar(
-                                      backgroundColor: Color(0xFF464646),
-                                      duration: Duration(seconds: 1),
-                                      behavior: SnackBarBehavior.floating,
-                                      content: Text('Cannot add empty description'),
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  }
-                                },
+                              Container(
+                                margin: EdgeInsets.only(top: 14),
+                                child: ElevatedButton.icon(
+                                  icon: Icon(Icons.add),
+                                  label: Text("Add"),
+                                  onPressed: () {
+                                    if (collegeDescriptionTextEditingController.text.isNotEmpty) {
+                                      setState(() {
+                                        collegeDescriptionList.add(collegeDescriptionTextEditingController.text);
+                                        collegeDescriptionTextEditingController.text = '';
+                                      });
+                                    } else {
+                                      final snackBar = SnackBar(
+                                        backgroundColor: Color(0xFF464646),
+                                        duration: Duration(seconds: 1),
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text('Cannot add empty description'),
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    }
+                                  },
+                                ),
                               )
                             ],
                           ),
@@ -475,25 +484,28 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                 hintText: 'Enter name of the Course',
                               ),
                             ),
-                            ElevatedButton.icon(
-                              icon: Icon(Icons.add),
-                              label: Text("Add"),
-                              onPressed: () {
-                                if (collegeCourseTextEditingController.text.isNotEmpty) {
-                                  setState(() {
-                                    collegeCourseList.add(collegeCourseTextEditingController.text);
-                                    collegeCourseTextEditingController.text = '';
-                                  });
-                                } else {
-                                  final snackBar = SnackBar(
-                                    backgroundColor: Color(0xFF464646),
-                                    duration: Duration(seconds: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Text('Cannot add empty course'),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
-                              },
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (collegeCourseTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      collegeCourseList.add(collegeCourseTextEditingController.text);
+                                      collegeCourseTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty course'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
                             )
                           ],
                         ),
@@ -596,25 +608,28 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                   hintText: 'Description',
                                 ),
                               ),
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.add),
-                                label: Text("Add"),
-                                onPressed: () {
-                                  if (universityDescriptionTextEditingController.text.isNotEmpty) {
-                                    setState(() {
-                                      universityDescriptionList.add(universityDescriptionTextEditingController.text);
-                                      universityDescriptionTextEditingController.text = '';
-                                    });
-                                  } else {
-                                    final snackBar = SnackBar(
-                                      backgroundColor: Color(0xFF464646),
-                                      duration: Duration(seconds: 1),
-                                      behavior: SnackBarBehavior.floating,
-                                      content: Text('Cannot add empty description'),
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  }
-                                },
+                              Container(
+                                margin: EdgeInsets.only(top: 14),
+                                child: ElevatedButton.icon(
+                                  icon: Icon(Icons.add),
+                                  label: Text("Add"),
+                                  onPressed: () {
+                                    if (universityDescriptionTextEditingController.text.isNotEmpty) {
+                                      setState(() {
+                                        universityDescriptionList.add(universityDescriptionTextEditingController.text);
+                                        universityDescriptionTextEditingController.text = '';
+                                      });
+                                    } else {
+                                      final snackBar = SnackBar(
+                                        backgroundColor: Color(0xFF464646),
+                                        duration: Duration(seconds: 1),
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text('Cannot add empty description'),
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    }
+                                  },
+                                ),
                               )
                             ],
                           ),
@@ -684,25 +699,28 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                 hintText: 'Enter name of the branch',
                               ),
                             ),
-                            ElevatedButton.icon(
-                              icon: Icon(Icons.add),
-                              label: Text("Add"),
-                              onPressed: () {
-                                if (universityBranchTextEditingController.text.isNotEmpty) {
-                                  setState(() {
-                                    universityBranchList.add(universityBranchTextEditingController.text);
-                                    universityBranchTextEditingController.text = '';
-                                  });
-                                } else {
-                                  final snackBar = SnackBar(
-                                    backgroundColor: Color(0xFF464646),
-                                    duration: Duration(seconds: 1),
-                                    behavior: SnackBarBehavior.floating,
-                                    content: Text('Cannot add empty course'),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
-                              },
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (universityBranchTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      universityBranchList.add(universityBranchTextEditingController.text);
+                                      universityBranchTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty course'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
                             )
                           ],
                         ),

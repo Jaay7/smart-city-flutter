@@ -137,6 +137,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
+                              color: Color(0xC5B5838D),
                               padding: EdgeInsets.all(10.0),
                               width: 160,
                               height: 160,
@@ -144,11 +145,11 @@ class _CategoriesState extends State<Categories> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(school['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  Text(school['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
                                   SizedBox(height: 8),
-                                  Text(school['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(school['contactInfo'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                   SizedBox(height: 4),
-                                  Text(school['address'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(school['address'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                 ],
                               ),
                             ),
@@ -228,6 +229,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
+                              color: Color(0xC5B5838D),
                               padding: EdgeInsets.all(10.0),
                               width: 160,
                               height: 160,
@@ -235,11 +237,11 @@ class _CategoriesState extends State<Categories> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(college['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  Text(college['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
                                   SizedBox(height: 8),
-                                  Text(college['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(college['contactInfo'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                   SizedBox(height: 4),
-                                  Text(college['address'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(college['address'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                 ],
                               ),
                             ),
@@ -319,6 +321,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
+                              color: Color(0xC5B5838D),
                               padding: EdgeInsets.all(10.0),
                               width: 160,
                               height: 160,
@@ -326,11 +329,11 @@ class _CategoriesState extends State<Categories> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(university['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  Text(university['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
                                   SizedBox(height: 8),
-                                  Text(university['contactInfo'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(university['contactInfo'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                   SizedBox(height: 8),
-                                  Text(university['address'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(university['address'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                 ],
                               ),
                             ),
@@ -410,6 +413,7 @@ class _CategoriesState extends State<Categories> {
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Container(
+                              color: Color(0xC5B5838D),
                               padding: EdgeInsets.all(10.0),
                               width: 160,
                               height: 160,
@@ -417,9 +421,9 @@ class _CategoriesState extends State<Categories> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(job['name'], style: TextStyle(fontSize: 18, color: Color(0xFF636363)),),
+                                  Text(job['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
                                   SizedBox(height: 8),
-                                  Text(job['jobType'], style: TextStyle(color: Color(0xFF727272))),
+                                  Text(job['jobType'], style: TextStyle(color: Color(0xFFe2e2e2))),
                                 ],
                               ),
                             ),

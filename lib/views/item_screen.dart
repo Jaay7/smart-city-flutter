@@ -77,7 +77,7 @@ class _ItemScreenState extends State<ItemScreen> {
       appBar: AppBar(
         primary: true,
         // title: Text("${widget.name}"),
-        backgroundColor: const Color(0xD9D1ACA5),
+        backgroundColor: const Color(0xFFB5838D),
         elevation: 0,
       ),
       body: widget.category == 'School' ? Query(
@@ -98,7 +98,7 @@ class _ItemScreenState extends State<ItemScreen> {
       final school = result.data['school'];
       return Container(
         height: MediaQuery.of(context).size.height,
-        color: Color(0x60E2CFC9),
+        color: Color(0x50E5989B),
         child: Stack(
           children: [
             Container(
@@ -111,9 +111,9 @@ class _ItemScreenState extends State<ItemScreen> {
                   bottomLeft: Radius.circular(50.0),
                   bottomRight: Radius.circular(50.0)
                 ),
-                color: Color(0xD1D1ACA5),
+                color: Color(0xFFB5838D),
               ),
-              child: Text(school['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
+              child: Text(school['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white70),),
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
@@ -132,9 +132,18 @@ class _ItemScreenState extends State<ItemScreen> {
                         ),
                         blurRadius: 10.0,
                         spreadRadius: 2.5,
-                      ), //BoxShadow
+                      ), 
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(
+                          0.0,
+                          0.0,
+                        ),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ),
                     ],
-                    color: Colors.white,
+                    color: Color(0x7cE5989B),
                   ),
                   height: MediaQuery.of(context).size.height * 0.6,
                   width: MediaQuery.of(context).size.width - 40,
@@ -916,7 +925,7 @@ class _ItemScreenState extends State<ItemScreen> {
         )
       ),
       floatingActionButton: FloatingActionButton.extended(
-        // backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF6D6875),
         foregroundColor: Colors.white,
         onPressed: () {
           // Respond to button press
