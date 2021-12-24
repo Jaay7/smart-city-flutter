@@ -179,7 +179,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             title: Text('Job'),
                             selected: _selectedDestination == 3,
                             onTap: () => selectDestination(3),
-                          )
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.restaurant_rounded,),
+                            title: Text('Restaurants'),
+                            selected: _selectedDestination == 4,
+                            onTap: () => selectDestination(4),
+                          ),
                         ],
                       ),
                     ),
@@ -194,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // alignment: Alignment(0.0, -1.0),
                     // height: showMenu == false ? MediaQuery.of(context).size.height-60 : MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-240,
                     decoration: const BoxDecoration(
-                      color: Color(0x7cB5838D),
+                      color: Color(0x4cB5838D),
                       boxShadow: [
                       BoxShadow(
                         color: Colors.black45,
@@ -220,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
                         // color: Colors.amber,
-                        child: Categories(categoryName: _selectedDestination == 0 ? 'Schools' : _selectedDestination == 1 ? 'Colleges' : _selectedDestination == 2 ?'Universities': 'Jobs',)
+                        child: Categories(categoryName: _selectedDestination == 0 ? 'Schools' : _selectedDestination == 1 ? 'Colleges' : _selectedDestination == 2 ?'Universities': _selectedDestination == 3 ? 'Jobs' : 'Restaurants',)
                       ),
                     ),
                   ),

@@ -80,7 +80,7 @@ class _ItemScreenState extends State<ItemScreen> {
         backgroundColor: const Color(0xFFB5838D),
         elevation: 0,
       ),
-      body: widget.category == 'School' ? Query(
+      body: widget.category == 'Schools' ? Query(
       options: QueryOptions(
       document: gql(GET_SCHOOL),
       pollInterval: const Duration(milliseconds: 500),
@@ -279,7 +279,7 @@ class _ItemScreenState extends State<ItemScreen> {
         }
       ) :
 // college
-      widget.category == 'College' ? Query(
+      widget.category == 'Colleges' ? Query(
       options: QueryOptions(
       document: gql(GET_COLLEGE),
       pollInterval: const Duration(milliseconds: 500),
@@ -310,7 +310,7 @@ class _ItemScreenState extends State<ItemScreen> {
                   bottomLeft: Radius.circular(50.0),
                   bottomRight: Radius.circular(50.0)
                 ),
-                color: Color(0xD1D1ACA5),
+                color: Color(0xFFB5838D),
               ),
               child: Text(college['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
             ),
@@ -448,7 +448,7 @@ class _ItemScreenState extends State<ItemScreen> {
         }
       ) :
 // university
-      widget.category == 'University' ? Query(
+      widget.category == 'Universities' ? Query(
       options: QueryOptions(
       document: gql(GET_UNIVERSITY),
       pollInterval: const Duration(milliseconds: 500),
@@ -479,7 +479,7 @@ class _ItemScreenState extends State<ItemScreen> {
                   bottomLeft: Radius.circular(50.0),
                   bottomRight: Radius.circular(50.0)
                 ),
-                color: Color(0xD1D1ACA5),
+                color: Color(0xFFB5838D),
               ),
               child: Text(university['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
             ),
@@ -590,14 +590,14 @@ class _ItemScreenState extends State<ItemScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     for(var branch in university['branch']) Row(
-                            children: [
-                              Icon(Icons.circle, size: 6),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text("$branch"),
-                              ),
-                            ],
-                          )
+                                      children: [
+                                        Icon(Icons.circle, size: 6),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text("$branch"),
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 )
                               ],
@@ -616,7 +616,7 @@ class _ItemScreenState extends State<ItemScreen> {
         }
       ) :
       // job
-      widget.category == 'Job' ? Query(
+      widget.category == 'Jobs' ? Query(
       options: QueryOptions(
       document: gql(GET_JOB),
       pollInterval: const Duration(milliseconds: 500),
@@ -647,7 +647,7 @@ class _ItemScreenState extends State<ItemScreen> {
                   bottomLeft: Radius.circular(50.0),
                   bottomRight: Radius.circular(50.0)
                 ),
-                color: Color(0xD1D1ACA5),
+                color: Color(0xFFB5838D),
               ),
               child: Text(job['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
             ),
@@ -918,10 +918,12 @@ class _ItemScreenState extends State<ItemScreen> {
       ) : 
       Center(
         child: Column(
-      children: [
-        CircularProgressIndicator(),
-        Text("No data"),
-      ],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 10.0,),
+            Text("No data"),
+          ],
         )
       ),
       floatingActionButton: FloatingActionButton.extended(
