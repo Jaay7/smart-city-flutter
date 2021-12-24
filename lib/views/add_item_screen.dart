@@ -39,6 +39,24 @@ const addUniversityMutation = """
   }
 """;
 
+const addJobMutation = """
+mutation Mutation(\$name: String!, \$jobType: String!, \$description: [String], \$minSalary: String!, \$designation: String!, \$qualifications: String!, \$requirements: [String],\$lastDate: String!, \$startDate: String!,  \$benefits: [String], \$eligibility: [String]) {
+  addJob(
+    name: \$name, 
+    jobType: \$jobType, 
+    description: \$description, 
+    minSalary: \$minSalary, 
+    designation: \$designation, 
+    qualifications: \$qualifications, 
+    requirements: \$requirements, 
+    lastDate: \$lastDate, 
+    startDate: \$startDate, 
+    benefits: \$benefits, 
+    eligibility: \$eligibility
+  )
+}
+""";
+
 class AddItemScreen extends StatefulWidget {
   final String categoryName;
 
@@ -69,6 +87,18 @@ class _AddItemScreenState extends State<AddItemScreen> {
   TextEditingController universityAddressTextEditingController = TextEditingController();
   TextEditingController universityBranchTextEditingController = TextEditingController();
 
+  TextEditingController jobNameTextEditingController = TextEditingController();
+  TextEditingController jobTypeTextEditingController = TextEditingController();
+  TextEditingController jobDescriptionTextEditingController = TextEditingController();
+  TextEditingController jobMinSalaryTextEditingController = TextEditingController();
+  TextEditingController jobDesignationTextEditingController = TextEditingController();
+  TextEditingController jobQualificationsTextEditingController = TextEditingController();
+  TextEditingController jobRequirementsTextEditingController = TextEditingController();
+  TextEditingController jobLastDateTextEditingController = TextEditingController();
+  TextEditingController jobStartDateTextEditingController = TextEditingController();
+  TextEditingController jobBenefitsTextEditingController = TextEditingController();
+  TextEditingController jobEligibilityTextEditingController = TextEditingController();
+
   List<String> schoolDescriptionList = [];
   List<String> schoolStandardList = [];
 
@@ -77,6 +107,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
   List<String> universityDescriptionList = [];
   List<String> universityBranchList = [];
+
+  List<String> jobDescriptionList = [];
+  List<String> jobRequirementsList = [];
+  List<String> jobBenefitsList = [];
+  List<String> jobEligibilityList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -755,8 +790,457 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     ),
                   )
                 ),
-
-                ]
+              ]
+            ) :
+            widget.categoryName == 'Job' ?
+            Column(
+              children: [
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Name of the Job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobNameTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Name',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Type of the Job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobTypeTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Job type',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    // height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Description of the Job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        for(var desc in jobDescriptionList) ActionChip(
+                          label: Text("$desc"), 
+                          avatar: Icon(Icons.remove),
+                          onPressed: () {
+                            setState(() {
+                              jobDescriptionList.remove(desc);
+                            });
+                          }
+                        ),
+                        Wrap(
+                          alignment: WrapAlignment.end,
+                          children: [
+                            TextFormField(
+                              controller: jobDescriptionTextEditingController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(6.0),
+                                hintText: 'Description',
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (jobDescriptionTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      jobDescriptionList.add(jobDescriptionTextEditingController.text);
+                                      jobDescriptionTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty description'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Minimum Salary", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobMinSalaryTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Salary',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Enter the Job Designation", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobDesignationTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Designation',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Required Qualifications for the job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobQualificationsTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Experience',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    // height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Requirements for the Job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        for(var req in jobRequirementsList) ActionChip(
+                          label: Text("$req"), 
+                          avatar: Icon(Icons.remove),
+                          onPressed: () {
+                            setState(() {
+                              jobRequirementsList.remove(req);
+                            });
+                          }
+                        ),
+                        Wrap(
+                          alignment: WrapAlignment.end,
+                          children: [
+                            TextFormField(
+                              controller: jobRequirementsTextEditingController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(6.0),
+                                hintText: 'Requirements',
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (jobRequirementsTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      jobRequirementsList.add(jobRequirementsTextEditingController.text);
+                                      jobRequirementsTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty text'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Enter the Last date to apply", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobLastDateTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Last date',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Enter the Start date to apply", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        TextFormField(
+                          controller: jobStartDateTextEditingController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(6.0),
+                            hintText: 'Start date',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    // height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Benefits for the Job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        for(var ben in jobBenefitsList) ActionChip(
+                          label: Text("$ben"), 
+                          avatar: Icon(Icons.remove),
+                          onPressed: () {
+                            setState(() {
+                              jobBenefitsList.remove(ben);
+                            });
+                          }
+                        ),
+                        Wrap(
+                          alignment: WrapAlignment.end,
+                          children: [
+                            TextFormField(
+                              controller: jobBenefitsTextEditingController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(6.0),
+                                hintText: 'Benefits',
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (jobBenefitsTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      jobBenefitsList.add(jobBenefitsTextEditingController.text);
+                                      jobBenefitsTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty text'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 12.0,
+                  shadowColor: Colors.black38,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  margin: EdgeInsets.only(top: 15),
+                  child: Container(
+                    // height: 110,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Eligibility for the Job", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                        for(var eli in jobEligibilityList) ActionChip(
+                          label: Text("$eli"), 
+                          avatar: Icon(Icons.remove),
+                          onPressed: () {
+                            setState(() {
+                              jobEligibilityList.remove(eli);
+                            });
+                          }
+                        ),
+                        Wrap(
+                          alignment: WrapAlignment.end,
+                          children: [
+                            TextFormField(
+                              controller: jobEligibilityTextEditingController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(6.0),
+                                hintText: 'Benefits',
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 14),
+                              child: ElevatedButton.icon(
+                                icon: Icon(Icons.add),
+                                label: Text("Add"),
+                                onPressed: () {
+                                  if (jobEligibilityTextEditingController.text.isNotEmpty) {
+                                    setState(() {
+                                      jobEligibilityList.add(jobEligibilityTextEditingController.text);
+                                      jobEligibilityTextEditingController.text = '';
+                                    });
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      backgroundColor: Color(0xFF464646),
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('Cannot add empty text'),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ),
+              ],
             ) : Center(
               child: Text("No Data"),
             ),
@@ -765,7 +1249,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       ),
       floatingActionButton: Mutation(
         options: MutationOptions(
-          document: widget.categoryName == 'School' ? gql(addSchoolMutation) : widget.categoryName == 'College' ? gql(addCollegeMutation) : widget.categoryName == 'University' ? gql(addUniversityMutation) : null,
+          document: widget.categoryName == 'School' ? gql(addSchoolMutation) : widget.categoryName == 'College' ? gql(addCollegeMutation) : widget.categoryName == 'University' ? gql(addUniversityMutation) : widget.categoryName == 'Job' ? gql(addJobMutation) : null,
           onCompleted: (dynamic result) {
             print(result);
             final snackBar = SnackBar(
@@ -833,6 +1317,31 @@ class _AddItemScreenState extends State<AddItemScreen> {
                   'contactInfo': universityContactTextEditingController.text,
                   'address': universityAddressTextEditingController.text,
                   'branch': universityBranchList,
+                });
+              }
+              else {
+                final snackBar = SnackBar(
+                  backgroundColor: Color(0xFF464646),
+                  duration: Duration(seconds: 1),
+                  behavior: SnackBarBehavior.floating,
+                  content: Text('Please fill all the details'),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            } else if (widget.categoryName == 'Job') {
+              if (jobNameTextEditingController.text.isNotEmpty && jobTypeTextEditingController.text.isNotEmpty && jobDescriptionList.isNotEmpty && jobMinSalaryTextEditingController.text.isNotEmpty && jobDesignationTextEditingController.text.isNotEmpty && jobQualificationsTextEditingController.text.isNotEmpty && jobRequirementsList.isNotEmpty && jobLastDateTextEditingController.text.isNotEmpty && jobStartDateTextEditingController.text.isNotEmpty) {
+                runMutation({
+                  'name': jobNameTextEditingController.text,
+                  'jobType': jobTypeTextEditingController.text,
+                  'description': jobDescriptionList,
+                  'minSalary': jobMinSalaryTextEditingController.text,
+                  'designation': jobDesignationTextEditingController.text,
+                  'qualifications': jobQualificationsTextEditingController.text,
+                  'requirements': jobRequirementsList,
+                  'lastDate': jobLastDateTextEditingController.text,
+                  'startDate': jobStartDateTextEditingController.text,
+                  'benefits': jobBenefitsList,
+                  'eligibility': jobEligibilityList,
                 });
               }
               else {

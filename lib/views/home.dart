@@ -89,11 +89,22 @@ class _MyHomePageState extends State<MyHomePage> {
               elevation: 3,
               backgroundColor: Color(0xFFc8dde3),
               labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-              avatar: Icon(Icons.work, color: Color(0xFF82A3AC)),
+              avatar: Icon(Icons.corporate_fare_outlined, color: Color(0xFF82A3AC)),
               label: const Text('University'), 
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();
               Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'University',)));
+              }
+            ),
+            ActionChip(
+              elevation: 3,
+              backgroundColor: Color(0xFFc8dde3),
+              labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              avatar: Icon(Icons.work, color: Color(0xFF82A3AC)),
+              label: const Text('Job'), 
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemScreen(categoryName: 'Job',)));
               }
             ),
           ],
