@@ -19,6 +19,8 @@ const CREATE_USER = """
         lastName
         username
         email
+        role
+        userType
       }
   }
 """;

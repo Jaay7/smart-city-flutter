@@ -18,6 +18,8 @@ const LOGIN_USER = """
         lastName
         username
         email
+        role
+        userType
       }
   }
 """;
