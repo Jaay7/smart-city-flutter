@@ -4,6 +4,7 @@ import 'package:flutter_twitter/flutter_twitter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
 import 'package:smart_city_flutter/views/home.dart';
+import 'package:smart_city_flutter/views/signup.dart';
 import 'package:smart_city_flutter/widgets/widget.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -25,8 +26,6 @@ const LOGIN_USER = """
 """;
 
 class SignIn extends StatefulWidget {
-  final Function toogle;
-  SignIn(this.toogle);
 
   @override
   _SignInState createState() => _SignInState();
@@ -166,7 +165,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        widget.toogle();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 10),

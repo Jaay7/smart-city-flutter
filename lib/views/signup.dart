@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
 import 'package:smart_city_flutter/views/home.dart';
+import 'package:smart_city_flutter/views/signin.dart';
 import 'package:smart_city_flutter/widgets/widget.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -26,8 +27,6 @@ const CREATE_USER = """
 """;
 
 class SignUp extends StatefulWidget {
-  final Function toogle;
-  SignUp(this.toogle);
 
   // GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
   @override
@@ -250,7 +249,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              widget.toogle();
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 10),

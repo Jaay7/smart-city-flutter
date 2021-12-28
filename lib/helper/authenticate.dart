@@ -1,3 +1,4 @@
+import 'package:smart_city_flutter/views/landing_screen.dart';
 import 'package:smart_city_flutter/views/signin.dart';
 import 'package:smart_city_flutter/views/signup.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +10,28 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-  bool showSignIn = false;
-  void toogleView() {
+  String currPage = 'Landing';
+  void setSignIn() {
     setState(() {
-      showSignIn = !showSignIn;
+      currPage = 'SignIn';
+    });
+  }
+
+  void setSignUp() {
+    setState(() {
+      currPage = 'SignUp';
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (showSignIn) {
-      return SignIn(toogleView);
-    } else {
-      return SignUp(toogleView);
+    switch (currPage) {
+      case 'SignIn':
+        return SignIn();
+      case 'SignUp':
+        return SignUp();
+      default:
+        return LandingScreen();
     }
   }
 }

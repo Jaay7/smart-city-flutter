@@ -219,8 +219,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       ), //BoxShadow
                     ],
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25.0),
-                        topRight: Radius.circular(25.0)),
+                        topLeft: Radius.circular(15.0),
+                        topRight: Radius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
