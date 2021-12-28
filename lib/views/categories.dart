@@ -132,14 +132,8 @@ class _CategoriesState extends State<Categories> {
             ),
             Expanded(
               child: SizedBox(
-                child: response.length > 0 ? GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 2.0,
-                    crossAxisSpacing: 2.0,
-                    // childAspectRatio: 0.90,
-                    mainAxisExtent: 180.0,
-                  ),
+                child: response.length > 0 ? ListView.builder(
+                  
                   itemCount: response.length,
                   itemBuilder: (context, int index) {
                     var resp = response[index];
@@ -160,45 +154,84 @@ class _CategoriesState extends State<Categories> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                             ),
-                            child: Container(
-                              color: Color(0xC5B5838D),
-                              padding: EdgeInsets.all(10.0),
-                              width: 160,
-                              height: 160,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  widget.categoryName == "Jobs" ?
-                                  Column (
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  child: Container(
+                                    height: 130,
+                                    width: MediaQuery.of(context).size.width - 50,
+                                    child: Image.network(
+                                      widget.categoryName == 'Restaurants' ? resp['image'] : resp['image'] == null ? 'https://www.w3schools.com/w3css/img_lights.jpg' : resp['image'],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Container(
+                                    height: 130,
+                                    width: MediaQuery.of(context).size.width - 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Color(0x10000000),
+                                          Color(0x97000000)
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  color: Color(0x00B5838D),
+                                  padding: EdgeInsets.all(10.0),
+                                  height: 130,
+                                    width: MediaQuery.of(context).size.width - 50,
+                                  child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(resp['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
-                                      SizedBox(height: 8),
-                                      Text(resp['jobType'], style: TextStyle(color: Color(0xFFe2e2e2))),
-                                    ],
-                                  ) :
-                                  widget.categoryName == "Restaurants" ?
-                                  Column (
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(resp['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
-                                      SizedBox(height: 8),
-                                      Text(resp['price'], style: TextStyle(color: Color(0xFFe2e2e2))),
-                                    ],
-                                  ) :
-                                  Column (
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(resp['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
-                                      SizedBox(height: 8),
-                                      Text(resp['contactInfo'], style: TextStyle(color: Color(0xFFe2e2e2))),
-                                      SizedBox(height: 4),
-                                      Text(resp['address'], style: TextStyle(color: Color(0xFFe2e2e2))),
+                                      widget.categoryName == "Jobs" ?
+                                      Column (
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(resp['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
+                                          SizedBox(height: 8),
+                                          Text(resp['jobType'], style: TextStyle(color: Color(0xffe2e2e2))),
+                                        ],
+                                      ) :
+                                      widget.categoryName == "Restaurants" ?
+                                      Column (
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(resp['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
+                                          SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star, color: Colors.yellow, size: 15,),
+                                              SizedBox(width: 3),
+                                              Text(resp['rating'].toString(), style: TextStyle(color: Color(0xffe2e2e2))),
+                                            ],
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text("Starts at \u{20B9}${resp['price']}", style: TextStyle(color: Color(0xffe2e2e2))),
+                                        ],
+                                      ) :
+                                      Column (
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(resp['name'], style: TextStyle(fontSize: 18, color: Color(0xFFf1f1f1)),),
+                                          SizedBox(height: 8),
+                                          Text(resp['contactInfo'], style: TextStyle(color: Color(0xffe2e2e2))),
+                                          SizedBox(height: 4),
+                                          Text(resp['address'], style: TextStyle(color: Color(0xffe2e2e2))),
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

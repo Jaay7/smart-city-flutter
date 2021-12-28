@@ -10,7 +10,7 @@ void main() async {
 
   await dotenv.load(fileName: ".env");
 
-  final HttpLink httpLink = HttpLink("http://localhost:8081/apis/graphql");
+  final HttpLink httpLink = HttpLink("http://10.56.11.224:8081/apis/graphql");
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(

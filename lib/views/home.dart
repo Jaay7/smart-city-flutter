@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // alignment: Alignment(0.0, -1.0),
                     // height: showMenu == false ? MediaQuery.of(context).size.height-60 : MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-240,
                     decoration: const BoxDecoration(
-                      color: Color(0x4cB5838D),
+                      color: Color(0xffffffff),
                       boxShadow: [
                       BoxShadow(
                         color: Colors.black45,
