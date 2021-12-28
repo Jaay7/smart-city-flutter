@@ -3,6 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:smart_city_flutter/views/item_screen.dart';
 import 'package:animations/animations.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_city_flutter/views/restaurant_screen.dart';
 
 const GET_SCHOOLS = """
 query FindAllSchools{
@@ -146,7 +147,11 @@ class _CategoriesState extends State<Categories> {
                       children: [
                         GestureDetector(
                           onTap: () { 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(id: resp['id'],name: resp['name'], category: widget.categoryName,)));
+                            if (widget.categoryName == 'Restaurants') {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantScreen(name: resp['name'], id: resp['id'], category: widget.categoryName,)));
+                            } else {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(id: resp['id'],name: resp['name'], category: widget.categoryName,)));
+                            }
                           },
                           child: Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,

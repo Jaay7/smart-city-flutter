@@ -132,18 +132,9 @@ class _ItemScreenState extends State<ItemScreen> {
                         ),
                         blurRadius: 10.0,
                         spreadRadius: 2.5,
-                      ), 
-                      BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(
-                          0.0,
-                          0.0,
-                        ),
-                        blurRadius: 0.0,
-                        spreadRadius: 0.0,
                       ),
                     ],
-                    color: Color(0x7cE5989B),
+                    color: Colors.white,
                   ),
                   height: MediaQuery.of(context).size.height * 0.6,
                   width: MediaQuery.of(context).size.width - 40,
@@ -297,7 +288,7 @@ class _ItemScreenState extends State<ItemScreen> {
       final college = result.data['college'];
       return Container(
         height: MediaQuery.of(context).size.height,
-        color: Color(0x60E2CFC9),
+        color: Color(0x50E5989B),
         child: Stack(
           children: [
             Container(
@@ -312,7 +303,7 @@ class _ItemScreenState extends State<ItemScreen> {
                 ),
                 color: Color(0xFFB5838D),
               ),
-              child: Text(college['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
+              child: Text(college['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white70),),
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
@@ -466,7 +457,7 @@ class _ItemScreenState extends State<ItemScreen> {
       final university = result.data['university'];
       return Container(
         height: MediaQuery.of(context).size.height,
-        color: Color(0x60E2CFC9),
+        color: Color(0x50E5989B),
         child: Stack(
           children: [
             Container(
@@ -481,7 +472,7 @@ class _ItemScreenState extends State<ItemScreen> {
                 ),
                 color: Color(0xFFB5838D),
               ),
-              child: Text(university['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
+              child: Text(university['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white70),),
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
@@ -634,7 +625,7 @@ class _ItemScreenState extends State<ItemScreen> {
       final job = result.data['job'];
       return Container(
         height: MediaQuery.of(context).size.height,
-        color: Color(0x60E2CFC9),
+        color: Color(0x50E5989B),
         child: Stack(
           children: [
             Container(
@@ -649,7 +640,7 @@ class _ItemScreenState extends State<ItemScreen> {
                 ),
                 color: Color(0xFFB5838D),
               ),
-              child: Text(job['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54),),
+              child: Text(job['name'], style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white70),),
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.18,
