@@ -113,172 +113,113 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        primary: true,
-        title: Text("Smart City"),
-        toolbarHeight: 60.0,
-        backgroundColor: Color(0xFF6D6875),
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-          setState(() {
-            showMenu = !showMenu;
-          });
-        }, icon: Icon(Icons.menu)),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings, 
-            ), onPressed: () { 
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
-            },
-          )
-        ],
-      ),
-      body: Builder(
-        builder: (context) {
-          return Container(
-            color: Color(0xFF6D6875),
-            // height: MediaQuery.of(context).size.height,
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: <Widget>[
-                Column( 
-                  children: [
-                  Container(
-                    transformAlignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    height: 200,
-                    child: ListTileTheme(
-                      selectedColor: Colors.white,
-                      textColor: Color(0x70FFFFFF),
-                      iconColor: Color(0x70FFFFFF),
-                      child: ListView(
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(Icons.school),
-                            title: Text('Schools'),
-                            selected: _selectedDestination == 0,
-                            onTap: () => selectDestination(0),
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.house),
-                            title: Text('Colleges'),
-                            selected: _selectedDestination == 1,
-                            onTap: () => selectDestination(1),
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.corporate_fare_outlined),
-                            title: Text('Universities'),
-                            selected: _selectedDestination == 2,
-                            onTap: () => selectDestination(2),
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.work),
-                            title: Text('Job'),
-                            selected: _selectedDestination == 3,
-                            onTap: () => selectDestination(3),
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.restaurant_rounded,),
-                            title: Text('Restaurants'),
-                            selected: _selectedDestination == 4,
-                            onTap: () => selectDestination(4),
-                          ),
-                        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Builder(
+          builder: (context) {
+            return Container(
+              color: Color(0xFFB5838D),
+              // height: MediaQuery.of(context).size.height,
+              child: Row(
+                // alignment: AlignmentDirectional.bottomCenter,
+                children: <Widget>[
+                  NavigationRail(
+                    backgroundColor: Color(0xFFB5838D),
+                    minWidth: 55.0,
+                    // extended: Styling.isLargeScreen(context),
+                    trailing: IconButton(
+                      onPressed: () {
+                        // Navigator.pop(context);
+                      }, 
+                      icon: Icon(Icons.settings, color: Colors.white,),
+                    ),
+                    selectedIndex: _selectedDestination,
+                    onDestinationSelected: (int index) {
+                      setState(() {
+                        _selectedDestination = index;
+                      });
+                    },
+                    unselectedIconTheme: const IconThemeData(color: Color(0x90FFFFFF)),
+                    labelType: NavigationRailLabelType.none,
+                    selectedIconTheme: const IconThemeData(color: Colors.white),
+                    destinations: const [
+                      NavigationRailDestination(
+                        icon: Icon(Icons.home_outlined),
+                        selectedIcon: Icon(Icons.home, color: Colors.white),
+                        label: Text('Home'),
                       ),
-                    ),
-                  )
-                ],),
-                AnimatedPositioned(
-                  curve: Curves.fastOutSlowIn,
-                  duration: const Duration(milliseconds: 500),
-                  height: showMenu == false ? MediaQuery.of(context).size.height * 0.875 : MediaQuery.of(context).size.height * 0.6,
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    // alignment: Alignment(0.0, -1.0),
-                    // height: showMenu == false ? MediaQuery.of(context).size.height-60 : MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top-240,
-                    decoration: const BoxDecoration(
-                      color: Color(0xffffffff),
-                      boxShadow: [
-                      BoxShadow(
-                        color: Colors.black45,
-                        offset: Offset(
-                          5.0,
-                          5.0,
-                        ),
-                        blurRadius: 10.0,
-                        spreadRadius: 2.5,
-                      ), //BoxShadow
-                      BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(0.0, 0.0),
-                        blurRadius: 0.0,
-                        spreadRadius: 0.0,
-                      ), //BoxShadow
+                      NavigationRailDestination(
+                        icon: Icon(Icons.school_outlined),
+                        selectedIcon: Icon(Icons.school_rounded, color: Colors.white),
+                        label: Text('School'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.class__outlined),
+                        selectedIcon: Icon(Icons.class_, color: Colors.white),
+                        label: Text('College'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.corporate_fare_outlined),
+                        selectedIcon: Icon(Icons.corporate_fare_rounded, color: Colors.white),
+                        label: Text('University'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.work_outline),
+                        selectedIcon: Icon(Icons.work, color: Colors.white),
+                        label: Text('Job'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.restaurant_rounded),
+                        selectedIcon: Icon(Icons.restaurant_rounded, color: Colors.white),
+                        label: Text('Restaurant'),
+                      ),
                     ],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.0),
-                        topRight: Radius.circular(15.0)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        // color: Colors.amber,
-                        child: Categories(categoryName: _selectedDestination == 0 ? 'Schools' : _selectedDestination == 1 ? 'Colleges' : _selectedDestination == 2 ?'Universities': _selectedDestination == 3 ? 'Jobs' : 'Restaurants',)
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: Color(0xffffffff),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: _selectedDestination != 0 ? Container(
+                          // color: Colors.amber,
+                          child: Categories(categoryName: _selectedDestination == 1 ? 'Schools' : _selectedDestination == 2 ? 'Colleges' : _selectedDestination == 3 ?'Universities': _selectedDestination == 4 ? 'Jobs' : _selectedDestination == 5 ? 'Restaurants' : 'no',)
+                        ) : Container(
+                          child: Text('home goes here'),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }
-      ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: Row(
-      //     children: [
-      //       IconButton(icon: Icon(Icons.menu), onPressed: () {}),
-      //       Spacer(),
-      //       IconButton(icon: Icon(Icons.search), onPressed: () {}),
-      //       IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
-      //     ],
-      //   ),
-      // ),
-      floatingActionButton:
-        FloatingActionButton(
-          foregroundColor: Colors.white,
-          child: const Icon(Icons.add), 
-          backgroundColor: Color(0xFFB5838D),
-          onPressed: () {
-            showDialog<void>(
-              context: context,
-              builder: (context) => BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                child: dialog,
-              )
+                ],
+              ),
             );
-            // showModalBottomSheet(
-            //   enableDrag: true,
-            //   context: context, 
-            //   shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.only(
-            //       topLeft: Radius.circular(25.0),
-            //       topRight: Radius.circular(25.0)),
-            //     ),
-            //   builder: (context) {
-            //     return Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: Container(
-            //         height: MediaQuery.of(context).size.height,
-            //         child: Text("Search")),
-            //     );
-            //   }
-            // );
           }
         ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
+        floatingActionButton:
+          FloatingActionButton.extended(
+            foregroundColor: Colors.white,
+            icon: const Icon(Icons.add), 
+            label: const Text('Add'),
+            backgroundColor: Color(0xFF6D6875),
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) => BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  child: dialog,
+                )
+              );
+            }
+          ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      ),
     );
   }
   void selectDestination(int index) {
