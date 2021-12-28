@@ -7,13 +7,15 @@ import 'package:smart_city_flutter/widgets/widget.dart';
 import 'package:flutter/cupertino.dart';
 
 const CREATE_USER = """
-  mutation CreateUser(\$firstName: String!, \$lastName: String!, \$username: String!, \$email: String!, \$password: String!) {
+  mutation CreateUser(\$firstName: String, \$lastName: String, \$username: String!, \$email: String, \$password: String, \$role: String, \$userType: String!) {
     createUser(
       firstName: \$firstName
       lastName: \$lastName
       username: \$username,
       email: \$email,
       password: \$password,
+      role: \$role,
+      userType: \$userType
     ) {
         id
         firstName
@@ -200,12 +202,15 @@ class _SignUpState extends State<SignUp> {
                         document: gql(CREATE_USER),
                         onCompleted: (dynamic result) {
                           print(result);
-                          Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => MyHomePage()));
                           HelperFunctions.saveUserLoggedInSharedPrefrences(true);
                           HelperFunctions.saveUserNameSharedPrefrences(result['CreateUser']['username']);
                           HelperFunctions.saveUserIdSharedPrefrences(result['CreateUser']['id']);
                           HelperFunctions.saveUserLoginTypeSharedPrefrences('anonymous');
-                        }
+                          Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                        },
+                        onError: (error) {
+                          print(error);
+                        },
                       ), builder: (
                         RunMutation runMutation,
                         QueryResult result,
@@ -217,6 +222,8 @@ class _SignUpState extends State<SignUp> {
                             'username': usernameTextEditingController.text,
                             'email': emailTextEditingController.text,
                             'password': passwordTextEditingController.text,
+                            'role': 'user',
+                            'userType': 'anonymous'
                           }),
                           child: Container(
                             alignment: Alignment.center,
