@@ -129,7 +129,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     // extended: Styling.isLargeScreen(context),
                     trailing: IconButton(
                       onPressed: () {
-                        // Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Settings(),
+                          ),
+                        );
                       }, 
                       icon: Icon(Icons.settings, color: Colors.white,),
                     ),
@@ -173,6 +178,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         selectedIcon: Icon(Icons.restaurant_rounded, color: Colors.white),
                         label: Text('Restaurant'),
                       ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.tour_outlined),
+                        selectedIcon: Icon(Icons.tour_rounded, color: Colors.white),
+                        label: Text('Tourism'),
+                      ),
                     ],
                   ),
                   Expanded(
@@ -190,9 +200,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.all(20.0),
                         child: _selectedDestination != 0 ? Container(
                           // color: Colors.amber,
-                          child: Categories(categoryName: _selectedDestination == 1 ? 'Schools' : _selectedDestination == 2 ? 'Colleges' : _selectedDestination == 3 ?'Universities': _selectedDestination == 4 ? 'Jobs' : _selectedDestination == 5 ? 'Restaurants' : 'no',)
-                        ) : Container(
-                          child: Text('home goes here'),
+                          child: Categories(categoryName: _selectedDestination == 1 ? 'Schools' : _selectedDestination == 2 ? 'Colleges' : _selectedDestination == 3 ?'Universities': _selectedDestination == 4 ? 'Jobs' : _selectedDestination == 5 ? 'Restaurants' : 'TouristPlaces',)
+                        ) : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text('Smart City', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black54)),
+                          ],
                         ),
                       ),
                     ),
