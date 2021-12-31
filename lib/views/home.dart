@@ -457,7 +457,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   )
                                                 ),
                                                 const SizedBox(width: 10,),
-                                                Text(place['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                Text(place['tourismName'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
                                               ],
                                             )
                                           ),
