@@ -79,7 +79,6 @@ class _ProfileState extends State<Profile> {
             }
         
             return Container(
-              color: const Color(0x44E5989B),
               height: MediaQuery.of(context).size.height,
               padding: const EdgeInsets.all(10.0),
               width: MediaQuery.of(context).size.width,
@@ -87,7 +86,7 @@ class _ProfileState extends State<Profile> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const CircleAvatar(
-                    radius: 70,
+                    radius: 50,
                     backgroundImage: NetworkImage("https://picsum.photos/200/300"),
                   ),
                   const SizedBox(height: 20),
@@ -96,49 +95,6 @@ class _ProfileState extends State<Profile> {
                   const SizedBox(height: 10),
                   Text(result.data['user']['email'], style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Color(0xFF727272)),),
                   const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Image.asset(
-                            "assets/images/google_logo.png",
-                            height: 28,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 30),
-                      GestureDetector(
-                        onTap: () {
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Image.asset(
-                            "assets/images/facebook_logo.png",
-                            height: 25,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 30),
-                      GestureDetector(
-                        onTap: () {
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Image.asset(
-                            "assets/images/twitter_logo.png",
-                            height: 40,
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      
-                    ],
-                  ),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
                   //   children: [
@@ -174,10 +130,10 @@ class _ProfileState extends State<Profile> {
                           height: 50,
                           width: MediaQuery.of(context).size.width / 2 - 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: _selectedDestination == 1 ? Color(0xFFFFFFFF) : Color(0xFF6D6875),
+                            border: Border(bottom: BorderSide(color: _selectedDestination == 0 ? const Color(0xFFB5838D) : Colors.transparent, width: 2.0)),
+                            color: Colors.transparent
                           ),
-                          child: Center(child: Text("About", style: TextStyle(color: _selectedDestination == 0 ? Color(0xFFFFFFFF) : Color(0xFF6D6875)),)),
+                          child: Center(child: Text("About", style: TextStyle(color: _selectedDestination == 0 ? const Color(0xFFB5838D) : const Color(0xFF6D6875), fontWeight: _selectedDestination == 0 ? FontWeight.w600 : FontWeight.w500, fontSize: 16),)),
                         ),
                       ),
                       GestureDetector(
@@ -191,10 +147,9 @@ class _ProfileState extends State<Profile> {
                           height: 50,
                           width: MediaQuery.of(context).size.width / 2 - 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: _selectedDestination == 0 ? Color(0xFFFFFFFF) : Color(0xFF6D6875),
+                            border: Border(bottom: BorderSide(color: _selectedDestination == 1 ? const Color(0xFFB5838D) : Colors.transparent, width: 2.0)),
                           ),
-                          child: Center(child: Text("Favourites", style: TextStyle(color: _selectedDestination == 1 ? Color(0xFFFFFFFF) : Color(0xFF6D6875)),)),
+                          child: Center(child: Text("Favourites", style: TextStyle(color: _selectedDestination == 1 ? const Color(0xFFB5838D) : const Color(0xFF6D6875), fontWeight: _selectedDestination == 1 ? FontWeight.w600 : FontWeight.w500, fontSize: 16),)),
                         ),
                       )
                     ]
@@ -212,7 +167,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           margin: EdgeInsets.only(top: 15),
                           child: Container(
-                            color: Color(0xE5B5838D),
+                            color: Color(0xFFFFF4DC),
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.all(18.0),
                             child: Row(
@@ -222,11 +177,11 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Username", style: TextStyle(fontSize: 14, color: Color(0xFFe2e2e2), fontWeight: FontWeight.w400),),
-                                    SizedBox(height: 10,),
+                                    Text("Username", style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.w400),),
+                                    SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['username']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFf1f1f1))),
+                                      child: Text("${result.data['user']['username']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
@@ -248,7 +203,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           margin: EdgeInsets.only(top: 15),
                           child: Container(
-                            color: Color(0xE5B5838D),
+                            color: Color(0xFFE7F4FF),
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.all(18.0),
                             child: Row(
@@ -258,11 +213,11 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("First Name", style: TextStyle(fontSize: 14, color: Color(0xFFe2e2e2), fontWeight: FontWeight.w400),),
-                                    SizedBox(height: 10,),
+                                    Text("First Name", style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.w400),),
+                                    SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['firstName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFf1f1f1))),
+                                      child: Text("${result.data['user']['firstName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
@@ -284,7 +239,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           margin: EdgeInsets.only(top: 15),
                           child: Container(
-                            color: Color(0xE5B5838D),
+                            color: Color(0xFFE5F4EA),
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.all(18.0),
                             child: Row(
@@ -294,11 +249,11 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Last Name", style: TextStyle(fontSize: 14, color: Color(0xFFe2e2e2), fontWeight: FontWeight.w400),),
-                                    SizedBox(height: 10,),
+                                    Text("Last Name", style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.w400),),
+                                    SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['lastName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFf1f1f1))),
+                                      child: Text("${result.data['user']['lastName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
@@ -320,7 +275,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           margin: EdgeInsets.only(top: 15),
                           child: Container(
-                            color: Color(0xE5B5838D),
+                            color: Color(0x8aD394A8),
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.all(18.0),
                             child: Row(
@@ -330,11 +285,11 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Email", style: TextStyle(fontSize: 14, color: Color(0xFFe2e2e2), fontWeight: FontWeight.w400),),
-                                    SizedBox(height: 10,),
+                                    Text("Email", style: TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.w400),),
+                                    SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['email']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFf1f1f1))),
+                                      child: Text("${result.data['user']['email']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
