@@ -8,6 +8,46 @@ import 'package:smart_city_flutter/views/add_item_screen.dart';
 import 'package:smart_city_flutter/views/categories.dart';
 import 'package:smart_city_flutter/views/settings.dart';
 
+
+const searchQuery = """
+query Query(\$schoolVal: String, \$jobsVal: String, \$collegesVal: String, \$universitiesVal: String, \$restaurantsVal: String, \$touristPlacesVal: String) {
+  searchSchools(val: \$schoolVal) {
+    id
+    name
+    address
+    contactInfo
+  }
+  searchJobs(val: \$jobsVal) {
+    id
+    name
+    jobType
+    minSalary
+  }
+  searchColleges(val: \$collegesVal) {
+    id
+    name
+    contactInfo
+  }
+  searchUniversities(val: \$universitiesVal) {
+    id
+    name
+    contactInfo
+  }
+  searchRestaurants(val: \$restaurantsVal) {
+    id
+    name
+    rating
+    price
+  }
+  searchTouristPlaces(val: \$touristPlacesVal) {
+    id
+    city
+    state
+    country
+    tourismName
+  }
+}
+""";
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -21,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedDestination = 0;
   bool showMenu = false;
   String username = '';
+  String _searchText = '';
   @override
   void initState() {
     getUserInfo();
@@ -34,6 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     });
   }
+
+  TextEditingController searchTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Builder(
           builder: (context) {
             return Container(
@@ -201,11 +245,230 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: _selectedDestination != 0 ? Container(
                           // color: Colors.amber,
                           child: Categories(categoryName: _selectedDestination == 1 ? 'Schools' : _selectedDestination == 2 ? 'Colleges' : _selectedDestination == 3 ?'Universities': _selectedDestination == 4 ? 'Jobs' : _selectedDestination == 5 ? 'Restaurants' : 'TouristPlaces',)
-                        ) : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('Smart City', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black54)),
-                          ],
+                        ) : SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Welcome to Smart City', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black54)),
+                              const SizedBox(height: 15,),
+                              const Text('What would you like to do today?', style: TextStyle(fontSize: 16, color: Colors.black54)),
+                              const SizedBox(height: 15,),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xFFc8dde3),
+                                ),
+                                child: TextFormField(
+                                  controller: searchTextEditingController,
+                                  decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.search, color: Colors.black54),
+                                    hintText: 'Search here...',
+                                    hintStyle: TextStyle(color: Colors.black54),
+                                    border: InputBorder.none,
+                                  ),
+                                  style: TextStyle(color: Colors.black54),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _searchText = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: _searchText == '' ?
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: MediaQuery.of(context).size.height * 0.5,
+                                  child: Text("No items to show", style: TextStyle(fontSize: 16, color: Colors.black54)),
+                                )
+                                : Query(
+                                  options: QueryOptions(
+                                    document: gql(searchQuery),
+                                    pollInterval: const Duration(milliseconds: 500),
+                                    variables: {
+                                      'schoolVal': _searchText,
+                                      'jobsVal': _searchText,
+                                      'collegesVal': _searchText,
+                                      'universitiesVal': _searchText,
+                                      'restaurantsVal': _searchText,
+                                      'touristPlacesVal': _searchText,
+                                    },
+                                  ),
+                                  builder: (QueryResult result, {VoidCallback? refetch, FetchMore? fetchMore}) {
+                                    if (result.hasException) {
+                                      return Text(result.exception.toString());
+                                    }
+                                    if (result.isLoading) {
+                                      return Center(child: CircularProgressIndicator());
+                                    }
+                                    final schools = result.data['searchSchools'];
+                                    final jobs = result.data['searchJobs'];
+                                    final colleges = result.data['searchColleges'];
+                                    final universities = result.data['searchUniversities'];
+                                    final restaurants = result.data['searchRestaurants'];
+                                    final touristPlaces = result.data['searchTouristPlaces'];
+                                    return Container(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Schools", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                          const SizedBox(height: 10,),
+                                          for( var sch in schools ) Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    color: Color(0xFFc8dde3),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                ),
+                                                const SizedBox(width: 10,),
+                                                Text(sch['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                              ],
+                                            )
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          Text("Colleges", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                          const SizedBox(height: 10,),
+                                          for( var col in colleges ) Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    color: Color(0xFFc8dde3),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                ),
+                                                const SizedBox(width: 10,),
+                                                Text(col['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                              ],
+                                            )
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          Text("Universities", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                          const SizedBox(height: 10,),
+                                          for( var uni in universities ) Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    color: Color(0xFFc8dde3),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                ),
+                                                const SizedBox(width: 10,),
+                                                Text(uni['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                              ],
+                                            )
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          Text("Jobs", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                          const SizedBox(height: 10,),
+                                          for( var job in jobs ) Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    color: Color(0xFFc8dde3),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                ),
+                                                const SizedBox(width: 10,),
+                                                Text(job['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                              ],
+                                            )
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          Text("Restaurants", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                          const SizedBox(height: 10,),
+                                          for( var res in restaurants ) Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    color: Color(0xFFc8dde3),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                ),
+                                                const SizedBox(width: 10,),
+                                                Text(res['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                              ],
+                                            )
+                                          ),
+                                          const SizedBox(height: 10,),
+                                          Text("Tourist Places", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                          const SizedBox(height: 10,),
+                                          for( var place in touristPlaces ) Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    color: Color(0xFFc8dde3),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )
+                                                ),
+                                                const SizedBox(width: 10,),
+                                                Text(place['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                              ],
+                                            )
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
