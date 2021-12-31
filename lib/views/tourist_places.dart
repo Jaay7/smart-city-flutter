@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:smart_city_flutter/views/tags_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const GET_PLACE = """
@@ -105,7 +106,9 @@ class _TouristPlacesState extends State<TouristPlaces> {
                                 ),
                                 backgroundColor: const Color(0xFFB5838D),
                                 shadowColor: Colors.black38,
-                                onPressed: () {  },
+                                onPressed: () { 
+                                  Navigator.push( context, MaterialPageRoute(builder: (context) => TagsScreen(tags: place, category: 'TouristPlaces')));
+                                },
                               ),
                             ),
                           ],
