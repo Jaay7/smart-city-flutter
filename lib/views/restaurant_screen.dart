@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:smart_city_flutter/views/tags_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const GET_RESTAURANT = """
@@ -173,7 +174,9 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                         ),
                                         backgroundColor: const Color(0xFFB5838D),
                                         shadowColor: Colors.black38,
-                                        onPressed: () {  },
+                                        onPressed: () { 
+                                          Navigator.push( context, MaterialPageRoute(builder: (context) => TagsScreen(tags: res, category: 'Restaurants')));
+                                        },
                                       ),
                                     ),
                                   ],
@@ -361,11 +364,6 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                     onLongPress: () {
                                       showModalBottomSheet(
                                         context: context,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(25.0),
-                                            topRight: Radius.circular(25.0)),
-                                          ),
                                         builder: (context) {
                                           // Using Wrap makes the bottom sheet height the height of the content.
                                           // Otherwise, the height will be half the height of the screen.
