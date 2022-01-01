@@ -6,7 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
 import 'package:smart_city_flutter/views/add_item_screen.dart';
 import 'package:smart_city_flutter/views/categories.dart';
+import 'package:smart_city_flutter/views/item_screen.dart';
+import 'package:smart_city_flutter/views/restaurant_screen.dart';
 import 'package:smart_city_flutter/views/settings.dart';
+import 'package:smart_city_flutter/views/tourist_places.dart';
 
 
 const searchQuery = """
@@ -45,6 +48,7 @@ query Query(\$schoolVal: String, \$jobsVal: String, \$collegesVal: String, \$uni
     state
     country
     tourismName
+    image
   }
 }
 """;
@@ -314,152 +318,182 @@ class _MyHomePageState extends State<MyHomePage> {
                                         children: [
                                           Text("Schools", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
                                           const SizedBox(height: 10,),
-                                          for( var sch in schools ) Container(
-                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                    color: Color(0xFFc8dde3),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ),
-                                                const SizedBox(width: 10,),
-                                                Text(sch['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
-                                              ],
-                                            )
+                                          for( var sch in schools ) GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(name: sch['name'], id: sch['id'], category: 'Schools')));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(vertical: 5),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(25),
+                                                      color: Color(0xFFc8dde3),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Text(sch['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                ],
+                                              )
+                                            ),
                                           ),
                                           const SizedBox(height: 10,),
                                           Text("Colleges", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
                                           const SizedBox(height: 10,),
-                                          for( var col in colleges ) Container(
-                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                    color: Color(0xFFc8dde3),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ),
-                                                const SizedBox(width: 10,),
-                                                Text(col['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
-                                              ],
-                                            )
+                                          for( var col in colleges ) GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(name: col['name'], id: col['id'], category: 'Colleges')));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(vertical: 5),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(25),
+                                                      color: Color(0xFFc8dde3),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Text(col['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                ],
+                                              )
+                                            ),
                                           ),
                                           const SizedBox(height: 10,),
                                           Text("Universities", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
                                           const SizedBox(height: 10,),
-                                          for( var uni in universities ) Container(
-                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                    color: Color(0xFFc8dde3),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ),
-                                                const SizedBox(width: 10,),
-                                                Text(uni['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
-                                              ],
-                                            )
+                                          for( var uni in universities ) GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(name: uni['name'], id: uni['id'], category: 'Universities')));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(vertical: 5),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(25),
+                                                      color: Color(0xFFc8dde3),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Text(uni['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                ],
+                                              )
+                                            ),
                                           ),
                                           const SizedBox(height: 10,),
                                           Text("Jobs", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
                                           const SizedBox(height: 10,),
-                                          for( var job in jobs ) Container(
-                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                    color: Color(0xFFc8dde3),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ),
-                                                const SizedBox(width: 10,),
-                                                Text(job['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
-                                              ],
-                                            )
+                                          for( var job in jobs ) GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(name: job['name'], id: job['id'], category: 'Jobs')));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(vertical: 5),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(25),
+                                                      color: Color(0xFFc8dde3),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Text(job['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                ],
+                                              )
+                                            ),
                                           ),
                                           const SizedBox(height: 10,),
                                           Text("Restaurants", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
                                           const SizedBox(height: 10,),
-                                          for( var res in restaurants ) Container(
-                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                    color: Color(0xFFc8dde3),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ),
-                                                const SizedBox(width: 10,),
-                                                Text(res['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
-                                              ],
-                                            )
+                                          for( var res in restaurants ) GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantScreen(name: res['name'], id: res['id'], category: 'Restaurants')));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(vertical: 5),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(25),
+                                                      color: Color(0xFFc8dde3),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Text(res['name'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                ],
+                                              )
+                                            ),
                                           ),
                                           const SizedBox(height: 10,),
                                           Text("Tourist Places", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black54)),
                                           const SizedBox(height: 10,),
-                                          for( var place in touristPlaces ) Container(
-                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                    color: Color(0xFFc8dde3),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ),
-                                                const SizedBox(width: 10,),
-                                                Text(place['tourismName'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
-                                              ],
-                                            )
+                                          for( var place in touristPlaces ) GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => TouristPlaces(name: place['tourismName'], id: place['id'], category: 'Tourist Places', image: place['image'])));
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(vertical: 5),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(25),
+                                                      color: Color(0xFFc8dde3),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  ),
+                                                  const SizedBox(width: 10,),
+                                                  Text(place['tourismName'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45),),
+                                                ],
+                                              )
+                                            ),
                                           ),
                                         ],
                                       ),
