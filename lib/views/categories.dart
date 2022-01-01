@@ -88,6 +88,7 @@ query FindAllTouristPlaces {
     state
     rating
     price
+    image
   }
 }
 """;
@@ -159,7 +160,7 @@ class _CategoriesState extends State<Categories> {
                             if (widget.categoryName == 'Restaurants') {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantScreen(name: resp['name'], id: resp['id'], category: widget.categoryName,)));
                             } else if (widget.categoryName == 'TouristPlaces') {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => TouristPlaces(name: resp['tourismName'], id: resp['id'], category: widget.categoryName, image: resp['image'] == null ? 'https://images.unsplash.com/photo-1573259353568-5d8ab9cbc84f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' : resp['image'][0],)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => TouristPlaces(name: resp['tourismName'], id: resp['id'], category: widget.categoryName, image: resp['image'] == null ? 'https://images.unsplash.com/photo-1573259353568-5d8ab9cbc84f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' : resp['image'],)));
                             } else {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => ItemScreen(id: resp['id'],name: resp['name'], category: widget.categoryName,)));
                             }
