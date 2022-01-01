@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:smart_city_flutter/helper/helperfunctions.dart';
 
 const GET_UNIVERSITY = """
 query University(\$id: String!) {
@@ -60,6 +61,17 @@ query Job(\$id: String) {
 }
 """;
 
+const addFavouriteItem = """
+mutation AddFavouriteItem(\$category: String!, \$itemId: String!, \$userId: String!, \$itemName: String!) {
+  addFavouriteItem(
+    category: \$category, 
+    itemId: \$itemId, 
+    userId: \$userId, 
+    itemName: \$itemName
+  )
+}
+""";
+
 class ItemScreen extends StatefulWidget {
   final String name;
   final String category;
@@ -71,6 +83,22 @@ class ItemScreen extends StatefulWidget {
 }
 
 class _ItemScreenState extends State<ItemScreen> {
+
+  String userId = "";
+  @override
+  void initState() {
+    super.initState();
+    getUserId();
+  }
+
+  getUserId() async {
+    await HelperFunctions.getUserIdSharedPrefrences().then((value) {
+      setState(() {
+        userId = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -917,15 +945,40 @@ class _ItemScreenState extends State<ItemScreen> {
           ],
         )
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Color(0xFF6D6875),
-        foregroundColor: Colors.white,
-        onPressed: () {
-          // Respond to button press
-        },
-        icon: Icon(Icons.favorite_outline),
-        label: Text('Favourite'),
-      ),
+      floatingActionButton: Mutation(
+        options: MutationOptions(
+          document: gql(addFavouriteItem),
+          onCompleted: (dynamic result) {
+            print(result);
+            final snackBar = SnackBar(
+              backgroundColor: Color(0xFF464646),
+              duration: Duration(seconds: 1),
+              behavior: SnackBarBehavior.floating,
+              content: Text('${widget.category} added to favorites'),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ), builder: (
+          RunMutation runMutation,
+          QueryResult result,
+        ) {
+          return FloatingActionButton.extended(
+            backgroundColor: Color(0xFF6D6875),
+            foregroundColor: Colors.white,
+            onPressed: () {
+              // Respond to button press
+              runMutation({
+                'category': widget.category, 
+                'itemId': widget.id, 
+                'userId': userId, 
+                'itemName': widget.name,
+              });
+            },
+            icon: Icon(Icons.favorite_outline),
+            label: Text('Favourite'),
+          );
+        }
+      )
     );
   }
 }
