@@ -80,7 +80,7 @@ class _TagsScreenState extends State<TagsScreen> {
                     ),
                   );
                 }
-                if (result.loading) {
+                if (result.isLoading) {
                   return const SliverFillRemaining(
                     child: Center(
                       child: CircularProgressIndicator(),

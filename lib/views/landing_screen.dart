@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_city_flutter/views/signin.dart';
 import 'package:smart_city_flutter/views/signup.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_twitter/flutter_twitter.dart';
+// import 'package:flutter_twitter/flutter_twitter.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
 import 'package:smart_city_flutter/views/home.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -31,35 +31,35 @@ class _LandingScreenState extends State<LandingScreen> {
 
   String _twitterUsername = "";
 
-  static final TwitterLogin twitterLogin = TwitterLogin(
-    consumerKey: dotenv.env['TWITTER_CONSUMER_KEY'].toString(),
-    consumerSecret: dotenv.env['TWITTER_CONSUMER_SECRET'].toString(),
-  );
+  // static final TwitterLogin twitterLogin = TwitterLogin(
+  //   consumerKey: dotenv.env['TWITTER_CONSUMER_KEY'].toString(),
+  //   consumerSecret: dotenv.env['TWITTER_CONSUMER_SECRET'].toString(),
+  // );
 
-  _signInWithTwitter() async {
-    final TwitterLoginResult result = await twitterLogin.authorize();
-    switch (result.status) {
-      case TwitterLoginStatus.loggedIn:
-        final String token = result.session.token;
-        final String secret = result.session.secret;
-        final String username = result.session.username;
-        setState(() {
-          _twitterUsername = username;
-        });
-        HelperFunctions.saveUserNameSharedPrefrences(username);
-        HelperFunctions.saveUserLoginTypeSharedPrefrences('twitter');
-        print(username);
-        print(token);
-        print(secret);
-        break;
-      case TwitterLoginStatus.cancelledByUser:
-        print('cancelledByUser');
-        break;
-      case TwitterLoginStatus.error:
-        print(result.errorMessage);
-        break;
-    }
-  }
+  // _signInWithTwitter() async {
+  //   final TwitterLoginResult result = await twitterLogin.authorize();
+  //   switch (result.status) {
+  //     case TwitterLoginStatus.loggedIn:
+  //       final String token = result.session.token;
+  //       final String secret = result.session.secret;
+  //       final String username = result.session.username;
+  //       setState(() {
+  //         _twitterUsername = username;
+  //       });
+  //       HelperFunctions.saveUserNameSharedPrefrences(username);
+  //       HelperFunctions.saveUserLoginTypeSharedPrefrences('twitter');
+  //       print(username);
+  //       print(token);
+  //       print(secret);
+  //       break;
+  //     case TwitterLoginStatus.cancelledByUser:
+  //       print('cancelledByUser');
+  //       break;
+  //     case TwitterLoginStatus.error:
+  //       print(result.errorMessage);
+  //       break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +83,8 @@ class _LandingScreenState extends State<LandingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                // height: 200,
+              SizedBox(
+                height: 200,
                 width: MediaQuery.of(context).size.width -30,
                 child: Image.asset('assets/images/city.png'),
               ),
@@ -168,11 +168,11 @@ class _LandingScreenState extends State<LandingScreen> {
                   },
                 ), builder: (
                   RunMutation runMutation,
-                  QueryResult result,
+                  QueryResult? result,
                 ) {
                   return GestureDetector(
                     onTap: () async {
-                      await _signInWithTwitter();
+                      // await _signInWithTwitter();
                       await runMutation({
                         'username': _twitterUsername,
                         'userType': 'twitter'

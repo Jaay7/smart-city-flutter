@@ -82,7 +82,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             if (result.isLoading) {
               return const Center(heightFactor: 13.0, child: CircularProgressIndicator());
             }
-            final restaurant = result.data['restaurant'];
+            final restaurant = result.data?['restaurant'];
             return Row(
               children: <Widget>[
                 NavigationRail(
@@ -344,7 +344,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         if (result.isLoading) {
                           return const Center(heightFactor: 13.0, child: CircularProgressIndicator());
                         }
-                        final menu = result.data['getMenu'];
+                        final menu = result.data?['getMenu'];
                         return Column(
                           children: [
                             Container(

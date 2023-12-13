@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -75,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
   getUserInfo() async {
     await HelperFunctions.getUserNameSharedPrefrences().then((value) {
       setState(() {
-        username = value;
+        username = value!;
       });
     });
   }
@@ -207,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: Text('School'),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.class__outlined),
+                        icon: Icon(Icons.class_outlined),
                         selectedIcon: Icon(Icons.class_, color: Colors.white),
                         label: Text('College'),
                       ),
@@ -306,12 +308,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                     if (result.isLoading) {
                                       return Center(child: CircularProgressIndicator());
                                     }
-                                    final schools = result.data['searchSchools'];
-                                    final jobs = result.data['searchJobs'];
-                                    final colleges = result.data['searchColleges'];
-                                    final universities = result.data['searchUniversities'];
-                                    final restaurants = result.data['searchRestaurants'];
-                                    final touristPlaces = result.data['searchTouristPlaces'];
+                                    final schools = result.data?['searchSchools'];
+                                    final jobs = result.data?['searchJobs'];
+                                    final colleges = result.data?['searchColleges'];
+                                    final universities = result.data?['searchUniversities'];
+                                    final restaurants = result.data?['searchRestaurants'];
+                                    final touristPlaces = result.data?['searchTouristPlaces'];
                                     return Container(
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,

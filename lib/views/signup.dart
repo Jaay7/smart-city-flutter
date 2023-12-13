@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
@@ -213,7 +215,7 @@ class _SignUpState extends State<SignUp> {
                         },
                       ), builder: (
                         RunMutation runMutation,
-                        QueryResult result,
+                        QueryResult? result,
                       ) {
                         return GestureDetector(
                           onTap: () => runMutation({

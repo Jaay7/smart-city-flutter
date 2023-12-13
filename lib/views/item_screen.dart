@@ -94,7 +94,7 @@ class _ItemScreenState extends State<ItemScreen> {
   getUserId() async {
     await HelperFunctions.getUserIdSharedPrefrences().then((value) {
       setState(() {
-        userId = value;
+        userId = value!;
       });
     });
   }
@@ -123,7 +123,7 @@ class _ItemScreenState extends State<ItemScreen> {
       if (result.isLoading) {
         return const Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
       }
-      final school = result.data['school'];
+      final school = result.data?['school'];
       return Container(
         height: MediaQuery.of(context).size.height,
         color: Color(0x50E5989B),
@@ -313,7 +313,7 @@ class _ItemScreenState extends State<ItemScreen> {
       if (result.isLoading) {
         return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
       }
-      final college = result.data['college'];
+      final college = result.data?['college'];
       return Container(
         height: MediaQuery.of(context).size.height,
         color: Color(0x50E5989B),
@@ -482,7 +482,7 @@ class _ItemScreenState extends State<ItemScreen> {
       if (result.isLoading) {
         return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
       }
-      final university = result.data['university'];
+      final university = result.data?['university'];
       return Container(
         height: MediaQuery.of(context).size.height,
         color: Color(0x50E5989B),
@@ -650,7 +650,7 @@ class _ItemScreenState extends State<ItemScreen> {
       if (result.isLoading) {
         return Center(heightFactor: 13.0, child: CircularProgressIndicator(),);
       }
-      final job = result.data['job'];
+      final job = result.data?['job'];
       return Container(
         height: MediaQuery.of(context).size.height,
         color: Color(0x50E5989B),
@@ -960,7 +960,7 @@ class _ItemScreenState extends State<ItemScreen> {
           },
         ), builder: (
           RunMutation runMutation,
-          QueryResult result,
+          QueryResult? result,
         ) {
           return FloatingActionButton.extended(
             backgroundColor: Color(0xFF6D6875),

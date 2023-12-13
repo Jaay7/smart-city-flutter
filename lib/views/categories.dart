@@ -109,8 +109,8 @@ class _CategoriesState extends State<Categories> {
     // widget.categoryName == "Schools" ?
      Query(
         options: QueryOptions(
-          document: widget.categoryName == "Schools" ? gql(GET_SCHOOLS) : widget.categoryName == "Colleges" ? gql(GET_COLLEGES) : widget.categoryName == "Universities" ? gql(GET_UNIVERSITIES) : widget.categoryName == "Jobs" ? gql(GET_JOBS) : widget.categoryName == "Restaurants" ? gql(GET_RESTAURANTS): widget.categoryName == "TouristPlaces" ? gql(GET_TOURIST_PALCES) : null,
-          pollInterval: Duration(seconds: 1),
+          document: gql(widget.categoryName == "Schools" ? GET_SCHOOLS : widget.categoryName == "Colleges" ? GET_COLLEGES : widget.categoryName == "Universities" ? GET_UNIVERSITIES : widget.categoryName == "Jobs" ? GET_JOBS : widget.categoryName == "Restaurants" ? GET_RESTAURANTS : widget.categoryName == "TouristPlaces" ? GET_TOURIST_PALCES : ""),
+          pollInterval: const Duration(seconds: 1),
         ), 
         builder: (QueryResult result, {VoidCallback? refetch, FetchMore? fetchMore}) {
         if (result.hasException) {

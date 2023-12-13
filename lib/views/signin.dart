@@ -102,7 +102,7 @@ class _SignInState extends State<SignIn> {
                   }
                 ), builder: (
                   RunMutation runMutation,
-                  QueryResult result,
+                  QueryResult? result,
                 ) {
                   return GestureDetector(
                     onTap: () => runMutation({
@@ -124,7 +124,7 @@ class _SignInState extends State<SignIn> {
                     )
                   );
                 }),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(

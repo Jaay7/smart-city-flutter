@@ -8,9 +8,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
 
-  await dotenv.load(fileName: ".env");
+  // await dotenv.load(fileName: ".env");
 
-  final HttpLink httpLink = HttpLink("http://10.56.11.224:8081/apis/graphql");
+  final HttpLink httpLink = HttpLink("https://smart-city-backend.jaay7.repl.co/apis/graphql");
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(
@@ -41,7 +41,9 @@ class _MyAppState extends State<MyApp> {
   getUserLoggedIn() async {
     await HelperFunctions.getUserLoggedInSharedPrefrences().then((value) {
       setState(() {
-        userLoggedIn = value;
+        if (value != null) {
+          userLoggedIn = value;
+        }
       });
     });
   }
@@ -77,9 +79,7 @@ ColorScheme _lightColor = const ColorScheme(
   onPrimary: Colors.white, 
   onSecondary: ColorFour, 
   onSurface: ColorTwo, 
-  primaryVariant: ColorTwo, 
   secondary: ColorFive, 
-  secondaryVariant: ColorFive, 
   surface: ColorTwo, 
 );
 

@@ -1249,7 +1249,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
       ),
       floatingActionButton: Mutation(
         options: MutationOptions(
-          document: widget.categoryName == 'School' ? gql(addSchoolMutation) : widget.categoryName == 'College' ? gql(addCollegeMutation) : widget.categoryName == 'University' ? gql(addUniversityMutation) : widget.categoryName == 'Job' ? gql(addJobMutation) : null,
+          // document: widget.categoryName == 'School' ? gql(addSchoolMutation) : widget.categoryName == 'College' ? gql(addCollegeMutation) : widget.categoryName == 'University' ? gql(addUniversityMutation) : widget.categoryName == 'Job' ? gql(addJobMutation) : null,
+          document: gql(widget.categoryName == 'School' ? addSchoolMutation : widget.categoryName == 'College' ? addCollegeMutation : widget.categoryName == 'University' ? addUniversityMutation : widget.categoryName == 'Job' ? addJobMutation : ""),
           onCompleted: (dynamic result) {
             print(result);
             final snackBar = SnackBar(
@@ -1263,7 +1264,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
           },
         ), builder: (
           RunMutation runMutation,
-          QueryResult result,
+          QueryResult? result,
         )
         {
           return FloatingActionButton.extended(

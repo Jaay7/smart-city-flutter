@@ -86,7 +86,7 @@ class _TouristPlacesState extends State<TouristPlaces> {
                   if (result.isLoading) {
                     return Center(child: CircularProgressIndicator());
                   }
-                  final places = result.data['touristPlace'];
+                  final places = result.data?['touristPlace'];
                   return Container(
                     padding: const EdgeInsets.all(8.0),
                     width: MediaQuery.of(context).size.width,

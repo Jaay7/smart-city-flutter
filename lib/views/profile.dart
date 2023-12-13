@@ -37,7 +37,7 @@ class _ProfileState extends State<Profile> {
   getUserId() async {
     await HelperFunctions.getUserIdSharedPrefrences().then((value) {
       setState(() {
-        userId = value;
+        userId = value!;
       });
     });
   }
@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
   getUsername() async {
     await HelperFunctions.getUserNameSharedPrefrences().then((value) {
       setState(() {
-        username = value;
+        username = value!;
       });
     });
   }
@@ -91,9 +91,9 @@ class _ProfileState extends State<Profile> {
                   ),
                   const SizedBox(height: 20),
                   //generate a list for user data
-                  Text(result.data['user']['firstName'] + " " + result.data['user']['lastName'], style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                  Text(result.data?['user']['firstName'] + " " + result.data?['user']['lastName'], style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                   const SizedBox(height: 10),
-                  Text(result.data['user']['email'], style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Color(0xFF727272)),),
+                  Text(result.data?['user']['email'], style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Color(0xFF727272)),),
                   const SizedBox(height: 10),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
@@ -181,7 +181,7 @@ class _ProfileState extends State<Profile> {
                                     SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['username']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                      child: Text("${result.data?['user']['username']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
@@ -217,7 +217,7 @@ class _ProfileState extends State<Profile> {
                                     SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['firstName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                      child: Text("${result.data?['user']['firstName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
@@ -253,7 +253,7 @@ class _ProfileState extends State<Profile> {
                                     SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['lastName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                      child: Text("${result.data?['user']['lastName']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),
@@ -289,7 +289,7 @@ class _ProfileState extends State<Profile> {
                                     SizedBox(height: 5,),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Text("${result.data['user']['email']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
+                                      child: Text("${result.data?['user']['email']}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54)),
                                     ),
                                   ],
                                 ),

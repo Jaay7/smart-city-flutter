@@ -27,23 +27,23 @@ class HelperFunctions {
     return await prefs.setString(sharedPreferenceUserIdKey, userId);
   }
 
-  static Future<bool> getUserLoggedInSharedPrefrences() async {
+  static Future<bool?> getUserLoggedInSharedPrefrences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getBool(sharedPreferenceUserLoggedInKey);
+    return prefs.getBool(sharedPreferenceUserLoggedInKey);
   }
 
-  static Future<String> getUserNameSharedPrefrences() async {
+  static Future<String?> getUserNameSharedPrefrences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString(sharedPreferenceUserNameKey);
+    return prefs.getString(sharedPreferenceUserNameKey);
   }
 
-  static Future<String> getUserLoginTypeSharedPrefrences() async {
+  static Future<String?> getUserLoginTypeSharedPrefrences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString(sharedPreferenceUserLoginTypeKey);
+    return prefs.getString(sharedPreferenceUserLoginTypeKey);
   }
 
-  static Future<String> getUserIdSharedPrefrences() async {
+  static Future<String?> getUserIdSharedPrefrences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString(sharedPreferenceUserIdKey);
+    return prefs.getString(sharedPreferenceUserIdKey);
   }
 }

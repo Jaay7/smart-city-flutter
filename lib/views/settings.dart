@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_twitter/flutter_twitter.dart';
+// import 'package:flutter_twitter/flutter_twitter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_city_flutter/helper/authenticate.dart';
 import 'package:smart_city_flutter/helper/helperfunctions.dart';
@@ -15,10 +15,10 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
-  static final TwitterLogin twitterLogin = TwitterLogin(
-    consumerKey: dotenv.env['TWITTER_CONSUMER_KEY'].toString(),
-    consumerSecret: dotenv.env['TWITTER_CONSUMER_SECRET'].toString(),
-  );
+  // static final TwitterLogin twitterLogin = TwitterLogin(
+  //   consumerKey: dotenv.env['TWITTER_CONSUMER_KEY'].toString(),
+  //   consumerSecret: dotenv.env['TWITTER_CONSUMER_SECRET'].toString(),
+  // );
   
   String username = "";
   String userLoginType = '';
@@ -32,7 +32,7 @@ class _SettingsState extends State<Settings> {
   getUsername() async {
     await HelperFunctions.getUserNameSharedPrefrences().then((value) {
       setState(() {
-        username = value;
+        username = value!;
       });
     });
   }
@@ -40,7 +40,7 @@ class _SettingsState extends State<Settings> {
   getUserLoginType() async {
     await HelperFunctions.getUserLoginTypeSharedPrefrences().then((value) {
       setState(() {
-        userLoginType = value;
+        userLoginType = value!;
       });
     });
   }
@@ -97,7 +97,7 @@ class _SettingsState extends State<Settings> {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 if ( userLoginType == 'twitter' ) {
-                  await twitterLogin.logOut();
+                  // await twitterLogin.logOut();
                 }
                 await prefs.clear();
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Authenticate()));
